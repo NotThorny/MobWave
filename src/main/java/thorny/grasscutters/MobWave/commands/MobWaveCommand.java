@@ -18,14 +18,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 // Command usage
-@Command(label = "mobwave", aliases = "mw", description = "Spawn a wave of mobs", usage = "mobwave start / mobwave create waves mobs level")
+@Command(label = "mobwave", aliases = "mw", usage = 
+    "start/stop \n /mw create [# waves] [# mobs] [level] [wave time in sec]"+
+        "\n Wave time is optional and will default to 60 seconds if not specified")
 public class MobWaveCommand implements CommandHandler {
 
     int n = 0; // Counter
     boolean isWaves = false; // Whether waves are occuring or not
     static List<String> mobs = null; // Default null list of mobs
 
-    public static void readFile (){ // Read file to memory
+    public static void readFile (){         // Read file to memory
     try(
     InputStream resource = MobWaveCommand.class.getResourceAsStream("/monsters.txt"))
     {
@@ -39,30 +41,30 @@ public class MobWaveCommand implements CommandHandler {
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
         // Defaults for simple start
-        int nuMobs = 5;  // Placeholder # of mobs spawned per wave
-        int lvMobs = 90; // Placeholder level of monsters spawned
-        int nuWaves = 1; // Placeholder # of waves
-        long time = 60;   // Time between waves in seconds
+        int nuMobs = 5;     // Placeholder # of mobs spawned per wave
+        int lvMobs = 90;    // Placeholder level of monsters spawned
+        int nuWaves = 1;    // Placeholder # of waves
+        long time = 60;     // Time between waves in seconds
         
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
         if (args.size() < 1) {
             if (sender != null) {
-                CommandHandler.sendMessage(targetPlayer, "/mobwave start|stop or /mw create [waves] [# mobs]"+
-                    "[level] [optional time in seconds");
+                this.sendUsageMessage(targetPlayer);
             } // sender exists
         } // no args
 
         else if (args.size() > 5) {
-            CommandHandler.sendMessage(targetPlayer,
-                    "Too many args, /mobwave start|stop or /mw create [waves] [# mobs] [level]");
+            CommandHandler.sendMessage(targetPlayer, "Too many arguments!");
+            this.sendUsageMessage(targetPlayer);
         } // exceed size
 
         // Stops future waves from ocurring
         else if (args.get(0).equals("stop")) {
             if (isWaves) {
                 isWaves = false;
-                CommandHandler.sendMessage(targetPlayer, "Waves stopped.");
+                CommandHandler.sendMessage(targetPlayer, 
+                    "Stopping waves! \nPlease wait until current wave timer ends (finished message appears) to start a new custom wave.");
             } // if isWaves
             else {
                 CommandHandler.sendMessage(targetPlayer, "No waves to stop!");
@@ -79,16 +81,16 @@ public class MobWaveCommand implements CommandHandler {
             // Determine if time was set by user
             if(args.size() > 4){
                 if(args.get(4) != null){
-                    //Set time to match user input
-                    time = Long.parseLong(args.get(4));
+                    try {
+                        //Set time to match user input
+                        time = Long.parseLong(args.get(4));
+                    } catch (NumberFormatException exception) {
+                        this.sendUsageMessage(targetPlayer);
+                    }
                 }//if args
             }//if size
             
             executor.scheduleAtFixedRate(() -> {
-                // Shut down if waves have been stopped
-                if (!isWaves) {
-                    executor.shutdown();
-                } // if
 
                 // Spawn wave
                 if (isWaves) {
@@ -97,7 +99,7 @@ public class MobWaveCommand implements CommandHandler {
                 } // else
 
                 // Check if there are waves remaining
-                if (!checkWave(cWaves)) {
+                if (!checkWave(cWaves) || !isWaves) {
                     executor.shutdown();
                     CommandHandler.sendMessage(targetPlayer, "Custom waves finished.");
                     isWaves = false;
@@ -107,6 +109,7 @@ public class MobWaveCommand implements CommandHandler {
 
             }, 0, time, TimeUnit.SECONDS);
 
+            // Send wave time message
             if(cWaves > 1){
             CommandHandler.sendMessage(targetPlayer,
                     "Custom waves started! You have " + time + " seconds before the next wave starts!");
@@ -120,7 +123,7 @@ public class MobWaveCommand implements CommandHandler {
         } // start
 
         else {
-            CommandHandler.sendMessage(targetPlayer, "/mobwave start|stop or /mw create [waves] [# mobs] [level]");
+            this.sendUsageMessage(targetPlayer);
         } // else
 
         return;
@@ -146,17 +149,17 @@ public class MobWaveCommand implements CommandHandler {
         Random pRandom = new Random();
         for (int i = 0; nuMobs > i; i++) {
             String randomMob = mobs.get(pRandom.nextInt(mobs.size()));
-            args.clear(); // Clean the list
+            args.clear();           // Clean the list
             args.add(0, randomMob); // Add mobId to command
-            args.add("x1"); // Number of each mob spawned per randomly selected mob id
-            args.add("lv"+Integer.toString(mLevel)); // Level of mobs | Change to var for user input
-            spawnMob(sender, targetPlayer, args);
+            args.add("x1");         // Number of each mob spawned per randomly selected mob id
+            args.add("lv"+Integer.toString(mLevel)); // Mob level
+            spawnMob(sender, targetPlayer, args);    // Send to spawn mob
         } // nuMobs
     } // spawnWaves
 
     public void spawnMob(Player sender, Player targetPlayer, List<String> args) {
-        SpawnCommand sMob = new SpawnCommand(); // Call SpawnCommand to make monster
-        sMob.execute(sender, targetPlayer, args); // Spawn the mob
+        SpawnCommand sMob = new SpawnCommand();     // Call SpawnCommand to make monster
+        sMob.execute(sender, targetPlayer, args);   // Spawn the mob
     }// spawnMob
 
 }
