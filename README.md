@@ -8,6 +8,12 @@ There will probably be issues if you don't use the commands as intended so follo
 
 Don't blame me if you spawn 100000 mobs and crash your game/server.
 
+## Installation
+
+Get latest release from releases
+
+Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server if it was already running
+
 ## Usage
 
  `/mw start` 
