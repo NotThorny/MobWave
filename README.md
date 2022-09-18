@@ -20,7 +20,7 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
    -Will generate one wave of 5 random enemies at level 90.
 
- `/mw create [# of waves] [# of monsters] [level of mobs] [*OPTIONAL*: time per wave in seconds]`
+ `/mw create [# of waves] [# of monsters] [level of monsters] [OPTIONAL: time per wave in seconds]`
 
    -Create a custom set of waves, each wave will last for 1 minute so be quick!
 
@@ -33,4 +33,5 @@ This uses the Grasscutters plugin template for 1.3.1 (updated for new spawn comm
 ## Issues
 
 Sometimes a monster that can't be hit will spawn and attack for a few seconds before becoming docile.
+
 This plugin will only work on GC 1.3.1+ unless spawn command gets changed again.
