@@ -21,9 +21,10 @@ import java.util.*;
 @Command(label = "mobwave", aliases = "mw", description = "Spawn a wave of mobs", usage = "mobwave start / mobwave create waves mobs level")
 public class MobWaveCommand implements CommandHandler {
 
-    int n = 0;
+    int n = 0; // Counter
+    boolean isWaves = false; // Whether waves are occuring or not
     static List<String> mobs = null; // Default null list of mobs
- 
+
     public static void readFile (){ // Read file to memory
     try(
     InputStream resource = MobWaveCommand.class.getResourceAsStream("/monsters.txt"))
@@ -41,35 +42,69 @@ public class MobWaveCommand implements CommandHandler {
         int nuMobs = 5;  // Placeholder # of mobs spawned per wave
         int lvMobs = 90; // Placeholder level of monsters spawned
         int nuWaves = 1; // Placeholder # of waves
-        long time = 5;   // Time between waves in seconds
+        long time = 60;   // Time between waves in seconds
+        
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
         if (args.size() < 1) {
             if (sender != null) {
-                CommandHandler.sendMessage(targetPlayer, "/mobwave start|stop or /mw create [waves] [# mobs] [level]");
-            }
+                CommandHandler.sendMessage(targetPlayer, "/mobwave start|stop or /mw create [waves] [# mobs]"+
+                    "[level] [optional time in seconds");
+            } // sender exists
         } // no args
 
-        else if (args.size() > 4) {
+        else if (args.size() > 5) {
             CommandHandler.sendMessage(targetPlayer,
                     "Too many args, /mobwave start|stop or /mw create [waves] [# mobs] [level]");
         } // exceed size
+
+        // Stops future waves from ocurring
+        else if (args.get(0).equals("stop")) {
+            if (isWaves) {
+                isWaves = false;
+                CommandHandler.sendMessage(targetPlayer, "Waves stopped.");
+            } // if isWaves
+            else {
+                CommandHandler.sendMessage(targetPlayer, "No waves to stop!");
+            } // else
+        } // stop
 
         else if (args.get(0).equals("create")) {
             int cWaves = Integer.parseInt(args.get(1));
             int cMobs = Integer.parseInt(args.get(2));
             int cLevel = Integer.parseInt(args.get(3));
             List<String> clistMobs = mobs;
-            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            isWaves = true;
+
+            // Determine if time was set by user
+            if(args.size() > 4){
+                if(args.get(4) != null){
+                    //Set time to match user input
+                    time = Long.parseLong(args.get(4));
+                }//if args
+            }//if size
+            
             executor.scheduleAtFixedRate(() -> {
-                spawnWaves(sender, targetPlayer, args, cMobs, cWaves, clistMobs, cLevel);
-                incrementWaves();
+                // Shut down if waves have been stopped
+                if (!isWaves) {
+                    executor.shutdown();
+                } // if
+
+                // Spawn wave
+                if (isWaves) {
+                    spawnWaves(sender, targetPlayer, args, cMobs, cWaves, clistMobs, cLevel);
+                    incrementWaves();
+                } // else
+
+                // Check if there are waves remaining
                 if (!checkWave(cWaves)) {
                     executor.shutdown();
                     CommandHandler.sendMessage(targetPlayer, "Custom waves finished.");
+                    isWaves = false;
                     n = 0;
                     return;
-                } 
-                else {}
+                } // if
+
             }, 0, time, TimeUnit.SECONDS);
 
             if(cWaves > 1){
@@ -78,10 +113,6 @@ public class MobWaveCommand implements CommandHandler {
             }
             
         } // create
-        // Does nothing other than send message, needs implementation
-        else if (args.get(0).equals("stop")) {
-            CommandHandler.sendMessage(targetPlayer, "Waves stopped.");
-        } // stop
 
         else if (args.get(0).equals("start")) {
             spawnWaves(sender, targetPlayer, args, nuMobs, nuWaves, mobs, lvMobs);
