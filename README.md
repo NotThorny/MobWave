@@ -24,7 +24,9 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
    -Create a custom set of waves, each wave will last for 1 minute so be quick!
 
- A stop command exists but currently does nothing, so don't put a million waves.
+`/mw stop`
+
+   -Stops any further scheduled waves from happening
 
 ## Version
 
@@ -32,6 +34,8 @@ This uses the Grasscutters plugin template for 1.3.1 (updated for new spawn comm
 
 ## Issues
 
-Sometimes a monster that can't be hit will spawn and attack for a few seconds before becoming docile.
+Sometimes a friendly monster will spawn and support you, you are unable to damage said monster.
 
 This plugin will only work on GC 1.3.1+ unless spawn command gets changed again.
+
+Additional spawn modifiers added in 1.3.1 'extended spawn command' update are not applicable yet
