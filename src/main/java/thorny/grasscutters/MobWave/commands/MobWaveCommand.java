@@ -40,7 +40,8 @@ public class MobWaveCommand implements CommandHandler {
         // Defaults for simple start
         int nuMobs = 5;  // Placeholder # of mobs spawned per wave
         int lvMobs = 90; // Placeholder level of monsters spawned
-        int nuWaves = 1; // Placeholder # of waves    
+        int nuWaves = 1; // Placeholder # of waves
+        long time = 5;   // Time between waves in seconds
 
         if (args.size() < 1) {
             if (sender != null) {
@@ -69,11 +70,11 @@ public class MobWaveCommand implements CommandHandler {
                     return;
                 } 
                 else {}
-            }, 0, 1, TimeUnit.MINUTES);
+            }, 0, time, TimeUnit.SECONDS);
 
             if(cWaves > 1){
             CommandHandler.sendMessage(targetPlayer,
-                    "Custom waves started! You have 1 minute before the next wave starts!");
+                    "Custom waves started! You have " + time + " seconds before the next wave starts!");
             }
             
         } // create
