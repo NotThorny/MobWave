@@ -5,13 +5,20 @@ This pulls from a *nearly* complete list of monsters. Too many bosses were spawn
 Azdha was removed for appearing in every 4 of 5 runs.
 
 There will probably be issues if you don't use the commands as intended so follow the usage.
+
 Don't blame me if you spawn 100000 mobs and crash your game/server.
 
 ## Usage
 
- /mobwave or /mw
- `/mw start` Will generate one wave of 5 random enemies at level 10.
- `/mw create [# of waves] [# of monsters] [level of mobs]` Create a custom set of waves, each wave will last for 1 minute by default.
+ `/mw start` 
+ 
+   -Will generate one wave of 5 random enemies at level 90.
+   
+ `/mw create [# of waves] [# of monsters] [level of mobs]`
+ 
+   -Create a custom set of waves, each wave will last for 1 minute so be quick!
+
+
 
  A stop command exists but currently does nothing, so don't put a million waves.
 
