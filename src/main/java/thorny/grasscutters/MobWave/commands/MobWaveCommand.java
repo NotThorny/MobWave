@@ -178,8 +178,14 @@ public class MobWaveCommand implements CommandHandler {
         } // create
 
         else if (args.get(0).equals("start")) {
-            spawnWaves(sender, targetPlayer, args, nuMobs, nuWaves, mobs, lvMobs);
-            CommandHandler.sendMessage(targetPlayer, "Wave started.");
+            List<Integer> paramList = List.of(nuMobs, time);
+            int step = 0;
+            cTrigger.clear();
+            cTrigger.add(killMob);
+            cTrigger.add(timeMob);
+            mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs, cTrigger);
+            mobWaveChallenge.start();
+            spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, mobs, lvMobs, step, paramList, time);
         } // start
 
         else {
@@ -290,7 +296,7 @@ public class MobWaveCommand implements CommandHandler {
             // Check if waves are completed and shutdown if so
             if (!checkWave(nuWaves) || !isWaves) {
                 executor.shutdown();
-                CommandHandler.sendMessage(targetPlayer, "Custom waves finished.");
+                CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
                 isWaves = false;
                 generatedCount = 0;
                 resetWaves();
