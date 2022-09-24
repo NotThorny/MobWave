@@ -3,7 +3,6 @@
 This is a simple plugin to easily generate "waves" of random enemies to fight.
 This pulls from a *nearly* complete list of monsters. Too many bosses were spawning so I removed a bunch.
 
-
 There will probably be issues if you don't use the commands as intended so follow the usage.
 
 Don't blame me if you spawn 100000 mobs and crash your game/server.

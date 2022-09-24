@@ -40,11 +40,11 @@ public class sufferHandler implements CommandHandler {
 		readFile();
 		String state = "start";
         int nuMobs = 3;  // Placeholder # of mobs spawned per wave
-		int nuWaves = 15;  // Placeholder # of waves 
+		int nuWaves = 50;  // Placeholder # of waves 
         int lvMobs = 100; // Placeholder level of monsters spawned
-		float radius = 16f;// Placeholder radius of tp and spawns
-		float icd = 500f;   // Placeholder teleport and switch char cd in milliseconds
-		final Position pos = new Position(0, 250, 0); //for reference to base place
+		float radius = 8f;// Placeholder radius of tp and spawns
+		float icd = 2500f;   // Placeholder teleport and switch char cd in milliseconds
+		final Position pos = new Position(0, 0, 0); //for reference to base place
 		final Position rot = new Position(targetPlayer.getRotation().getX(),targetPlayer.getRotation().getY(),targetPlayer.getRotation().getZ()); //we sure dont want char wondering frm base pos
 		//catch args for parems yey
 		switch (args.size()) {
@@ -98,7 +98,7 @@ public class sufferHandler implements CommandHandler {
 		//tp to 0 0 0 for now
 		//targetPlayer.getPosition().set(0,0,0);                									//DEFAULT PLACE FOR FIGHT
 		targetPlayer.getPosition().set(pos);                                 			
-		targetPlayer.getWorld().transferPlayerToScene(targetPlayer,46301,pos);   					//IF NEED TP TO NEW SCENE
+		targetPlayer.getWorld().transferPlayerToScene(targetPlayer,50099,pos);   					//IF NEED TP TO NEW SCENE
 		targetPlayer.getScene().broadcastPacket(new PacketSceneEntityAppearNotify(targetPlayer));      //TRANSFER TO CURRENT POS AFTER DONE
 		
 		//finals coz java demands lambda snoo to have final vars
