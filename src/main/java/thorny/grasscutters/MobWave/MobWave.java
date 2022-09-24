@@ -1,6 +1,11 @@
 package thorny.grasscutters.MobWave;
 
 import emu.grasscutter.plugin.Plugin;
+import emu.grasscutter.server.event.EventHandler;
+import emu.grasscutter.server.event.HandlerPriority;
+import emu.grasscutter.server.event.entity.EntityDeathEvent;
+import emu.grasscutter.server.event.game.ReceivePacketEvent;
+// import emu.grasscutter.server.event.game.ServerTickEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 public final class MobWave extends Plugin {
@@ -13,7 +18,19 @@ public final class MobWave extends Plugin {
         instance = this;
     }
     @Override public void onEnable() {
-
+        new EventHandler<>(EntityDeathEvent.class)
+                .priority(HandlerPriority.NORMAL)
+                .listener(EventListener::EntityDeathEvent)
+                .register(this);
+        new EventHandler<>(ReceivePacketEvent.class)
+                .priority(HandlerPriority.NORMAL)
+                .listener(EventListener::onPacket)
+                .register(this);
+        // Temp implementation of onTimeTrigger
+        // new EventHandler<>(ServerTickEvent.class)
+        //         .priority(HandlerPriority.NORMAL)
+        //         .listener(EventListener::onTick)
+        //         .register(this);
         // Register commands.
         this.getHandle().registerCommand(new thorny.grasscutters.MobWave.commands.MobWaveCommand());
 
