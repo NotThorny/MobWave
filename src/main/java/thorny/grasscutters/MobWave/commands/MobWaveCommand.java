@@ -116,6 +116,10 @@ public class MobWaveCommand implements CommandHandler {
             int cWaves = Integer.parseInt(args.get(1));
             int cMobs = Integer.parseInt(args.get(2));
             int cLevel = Integer.parseInt(args.get(3));
+
+            if (cWaves < 1){
+                cWaves = 1;
+            }
             
             cTrigger.clear();
             cTrigger.add(killMob);
@@ -166,10 +170,10 @@ public class MobWaveCommand implements CommandHandler {
             }, 0, time, TimeUnit.SECONDS);
 */
             // Send wave time message
-            if(cWaves > 1){
-            CommandHandler.sendMessage(targetPlayer,
-                    "Custom waves started! You have " + time + " seconds before the next wave starts!");
-            }
+            // if(cWaves > 1){
+            // CommandHandler.sendMessage(targetPlayer,
+            //         "Custom waves started! You have " + time + " seconds before the next wave starts!");
+            // }
             
         } // create
 
@@ -185,14 +189,17 @@ public class MobWaveCommand implements CommandHandler {
         return;
     }
 // Old method no longer in use
-    // Increase wave counter after wave is spawned
-    // private void incrementWaves() {
-    //     n++;
-    // }// incrementWaves
+    //Increase wave counter after wave is spawned
+    private void incrementWaves() {
+        n++;
+    }// incrementWaves
+    private void resetWaves() {
+        n = 0;
+    }// resetWaves
 
     // Check if the desired number of waves have occured
     private boolean checkWave(int waves) {
-        if (waves == 1 || n >= waves ) {
+        if (n >= waves ) {
             return false;
         } else {
             return true;
@@ -270,15 +277,26 @@ public class MobWaveCommand implements CommandHandler {
     List<String> mobs, int mLevel, int step, List<Integer> paramList, int time){
         List<EntityMonster> newMonsters = new ArrayList<>();
         int goal = nuMobs;
-        
+        isWaves = true;
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
         executor.scheduleAtFixedRate(() -> {
-        isWaves = true;
 		Scene scene = targetPlayer.getScene();
 		Position pos = targetPlayer.getPosition();
+        newMonsters.clear();
         
 		if (getAliveMonstersCount() <= 2) {
+
+            // Check if waves are completed and shutdown if so
+            if (!checkWave(nuWaves) || !isWaves) {
+                executor.shutdown();
+                CommandHandler.sendMessage(targetPlayer, "Custom waves finished.");
+                isWaves = false;
+                generatedCount = 0;
+                resetWaves();
+                return;
+            } // if
+
 			if (generatedCount < goal) {
 				for (int i = 0; i < goal; i++) {
 					MonsterData monsterData = setMonsterData();
@@ -288,29 +306,19 @@ public class MobWaveCommand implements CommandHandler {
                     generatedCount++;
 				}
 				setMonsters(newMonsters);
-
+                incrementWaves();
 			}
             newMonsters.clear();
             
             // Check if there are waves remaining and spawn if last wave finished
-            if(n < nuWaves && nuWaves > 1){
-                if(mobWaveChallenge.isSuccess()){
+            if(nuWaves > 1){
+                if(mobWaveChallenge.isSuccess() && n < nuWaves){
                     generatedCount=0;
                     mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs, cTrigger);
                     mobWaveChallenge.start();
                     spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, mobs, mLevel, step, paramList, time);
-                    n++;
                 }
             }
-            
-            // Check if waves are completed and shutdown if so
-            if (!checkWave(nuWaves) || !isWaves) {
-                executor.shutdown();
-                generatedCount = 0;
-                isWaves = false;
-                n = 0;
-                return;
-            } // if
 		}
         }, 0, 1, TimeUnit.SECONDS);
 	}
