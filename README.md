@@ -26,7 +26,13 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 `/mw stop`
 
-   -Stops any further scheduled waves from happening
+   -Stops any further scheduled waves from happening.
+
+`/mw suffer`
+
+  -Suffer and probably die immediately.
+
+  Thanks @snoobi-seggs for the contribution to making suffer happen.
 
 ## Version
 
@@ -43,4 +49,4 @@ Use `/killall` to complete the wave.
 
 -No graphic on completion.
 
--Additional spawn modifiers added in 1.3.1 'extended spawn command' update are not applicable
+-Additional spawn modifiers added in 1.3.1 'extended spawn command' update are not applicable.
