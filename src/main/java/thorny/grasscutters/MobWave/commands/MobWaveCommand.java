@@ -284,6 +284,7 @@ public class MobWaveCommand implements CommandHandler {
         List<EntityMonster> newMonsters = new ArrayList<>();
         int goal = nuMobs;
         isWaves = true;
+        generatedCount = 0;
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
         executor.scheduleAtFixedRate(() -> {
@@ -298,12 +299,11 @@ public class MobWaveCommand implements CommandHandler {
                 executor.shutdown();
                 CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
                 isWaves = false;
-                generatedCount = 0;
                 resetWaves();
                 return;
             } // if
 
-			if (generatedCount < goal) {
+			if (generatedCount < goal && isWaves) {
 				for (int i = 0; i < goal; i++) {
 					MonsterData monsterData = setMonsterData();
 					EntityMonster entity = new EntityMonster(scene, monsterData, pos.nearby2d(4f), mLevel);
@@ -318,10 +318,11 @@ public class MobWaveCommand implements CommandHandler {
             
             // Check if there are waves remaining and spawn if last wave finished
             if(nuWaves > 1){
-                if(mobWaveChallenge.isSuccess() && n < nuWaves){
+                if(mobWaveChallenge.isSuccess() && n < nuWaves && isWaves){
                     generatedCount=0;
                     mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs, cTrigger);
                     mobWaveChallenge.start();
+                    executor.shutdown();
                     spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, mobs, mLevel, step, paramList, time);
                 }
             }
