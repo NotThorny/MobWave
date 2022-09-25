@@ -12,7 +12,10 @@ import emu.grasscutter.game.dungeons.challenge.trigger.KillMonsterTrigger;
 import emu.grasscutter.game.entity.EntityMonster;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.world.Scene;
+import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
+import emu.grasscutter.scripts.ScriptLib;
 import emu.grasscutter.scripts.data.SceneGroup;
+import emu.grasscutter.server.packet.send.PacketSceneEntityDisappearNotify;
 import emu.grasscutter.utils.Position;
 import thorny.grasscutters.MobWave.sufferHandler;
 import emu.grasscutter.Grasscutter;
@@ -56,6 +59,8 @@ public class MobWaveCommand implements CommandHandler {
     Instant start;
     int generatedCount = 0;
     public SceneGroup mobSG = new SceneGroup();
+    public ScriptLib sl = new ScriptLib();
+    // public SceneSuite mobSS = new SceneSuite();
 
     public static void readFile (){         // Read file to memory
     
@@ -99,16 +104,20 @@ public class MobWaveCommand implements CommandHandler {
 
         // Stops future waves from ocurring
         else if (args.get(0).equals("stop")) {
-            mobWaveChallenge.fail();
-            
-            
+            try {
+                if(mobWaveChallenge.inProgress()){
+                    removeAliveMobs();
+                    mobWaveChallenge.fail();
+                }
+            } catch (Exception e) {
+            }
             if (isWaves) {
                 isWaves = false;
                 CommandHandler.sendMessage(targetPlayer, 
                     "Stopping waves!");
             } // if isWaves
             else {
-                CommandHandler.sendMessage(targetPlayer, "No waves to stop!");
+                CommandHandler.sendMessage(targetPlayer, "No queued waves to stop!");
             } // else
         } // stop
 
@@ -126,10 +135,6 @@ public class MobWaveCommand implements CommandHandler {
             cTrigger.add(timeMob);
             goal = cMobs;
             int step=0;
-
-            //this.candidateMonsters.addAll(mobsInt);
-            //createMobList(cMobs, targetPlayer, cLevel, mobs);
-            //List<String> clistMobs = mobs;
             
             isWaves = true;
             // Determine if time was set by user
@@ -148,6 +153,8 @@ public class MobWaveCommand implements CommandHandler {
             mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, cMobs, cTrigger);
             mobWaveChallenge.start();
             spawnMobEntity(sender, targetPlayer, args, cMobs, cWaves, mobs, cLevel, step, paramList, time);
+            
+            
 
             // Old method for spawning monsters
 /*              executor.scheduleAtFixedRate(() -> {
@@ -254,10 +261,11 @@ public class MobWaveCommand implements CommandHandler {
         monsterData = GameData.getMonsterDataMap().get(Integer.parseInt(randomMob));
         return monsterData;
     }
-
+    // Return current challenge
     public WorldChallenge getChallenge(){
         return mobWaveChallenge;
     }
+    // Set groupId for new monsters
     public void setMonsters(List<EntityMonster> monsters) {
         activeMonsters.clear();
         activeMonsters.addAll(monsters);
@@ -265,6 +273,16 @@ public class MobWaveCommand implements CommandHandler {
             monster.setGroupId(mobSG.id);
         }
     }
+    // Remove currently alive monsters
+    public void removeAliveMobs() {
+        for (EntityMonster monster : activeMonsters) {
+            mobWaveChallenge.getScene().removeEntity(monster, VisionType.VISION_TYPE_REMOVE);
+            mobWaveChallenge.getScene()
+                    .broadcastPacket(new PacketSceneEntityDisappearNotify(monster, VisionType.VISION_TYPE_REMOVE));
+        }
+        activeMonsters.clear();
+    }
+    // Get count of alive monsters
     public int getAliveMonstersCount() {
         int count=0;
         for (EntityMonster monster: activeMonsters) {
@@ -278,7 +296,7 @@ public class MobWaveCommand implements CommandHandler {
 	public static int getMobScene() {
 		return 80085;
 	}
-    
+    // Spawn the monsters
 	public void spawnMobEntity(Player sender, Player targetPlayer, List<String> args, int nuMobs, int nuWaves,
     List<String> mobs, int mLevel, int step, List<Integer> paramList, int time){
         List<EntityMonster> newMonsters = new ArrayList<>();

@@ -39,12 +39,7 @@ This uses the Grasscutters plugin template for 1.3.1.
 
 ## Issues
 
--Sometimes a friendly monster will spawn and support you, you are unable to damage said monster.
-Use `/killall` to complete the wave.
-
 -Timer does not work (visual only).
-
--Ending the wave does not remove already spawned monsters.
 
 -No graphic on completion.
 
