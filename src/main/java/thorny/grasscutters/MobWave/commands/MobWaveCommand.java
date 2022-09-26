@@ -12,7 +12,6 @@ import emu.grasscutter.game.entity.EntityMonster;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
-import emu.grasscutter.scripts.ScriptLib;
 import emu.grasscutter.scripts.data.SceneGroup;
 import emu.grasscutter.server.packet.send.PacketSceneEntityDisappearNotify;
 import emu.grasscutter.utils.Position;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 // Command usage
 @Command(label = "mobwave", aliases = "mw", usage = 
     "start/stop \n /mw create [# waves] [# mobs] [level] [wave time in sec]"+
-        "\n Wave time is optional and will default to 60 seconds if not specified")
+        "\n Wave time is optional and will default to 180 seconds if not specified")
 public class MobWaveCommand implements CommandHandler {
     public static WorldChallenge mobWaveChallenge;
     KillMonsterTrigger killMob = new KillMonsterTrigger();
@@ -56,7 +55,6 @@ public class MobWaveCommand implements CommandHandler {
     Instant start;
     int generatedCount = 0;
     public SceneGroup mobSG = new SceneGroup();
-    public ScriptLib sl = new ScriptLib();
 
     public static void readFile (){         // Read file to memory
     
@@ -246,7 +244,7 @@ public class MobWaveCommand implements CommandHandler {
             if (!checkWave(nuWaves) || !isWaves) {
                 executor.shutdown();
                 activeMonsters.clear();
-                if(nuWaves > 1 && n > 1){
+                if(nuWaves > 1 && n > 1 && !exceedTime(targetPlayer)){
                     CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
                 }
                 isWaves = false;
@@ -272,7 +270,7 @@ public class MobWaveCommand implements CommandHandler {
             if(nuWaves > 1){
                 if(mobWaveChallenge.isSuccess() && n < nuWaves && isWaves){
                     generatedCount=0;
-                    mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 183, 183, paramList, time, nuMobs, cTrigger);
+                    mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs, cTrigger);
                     mobWaveChallenge.start();
                     executor.shutdown();
                     spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, mobs, mLevel, step, paramList, time);
@@ -285,9 +283,9 @@ public class MobWaveCommand implements CommandHandler {
     // New implementation of timer
     public boolean exceedTime(Player targetPlayer) {
         var current = System.currentTimeMillis();
-        CommandHandler.sendMessage(targetPlayer, "Ran out of time!");
         if (current - mobWaveChallenge.getStartedAt() > mobWaveChallenge
                 .getTimeLimit() * 1000L) {
+            CommandHandler.sendMessage(targetPlayer, "Ran out of time!");
             isWaves = false;
             removeAliveMobs();
             mobWaveChallenge.fail();
