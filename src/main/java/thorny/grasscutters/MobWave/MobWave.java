@@ -5,7 +5,6 @@ import emu.grasscutter.server.event.EventHandler;
 import emu.grasscutter.server.event.HandlerPriority;
 import emu.grasscutter.server.event.entity.EntityDeathEvent;
 import emu.grasscutter.server.event.game.ReceivePacketEvent;
-// import emu.grasscutter.server.event.game.ServerTickEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 public final class MobWave extends Plugin {

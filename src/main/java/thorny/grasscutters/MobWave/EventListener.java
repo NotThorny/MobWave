@@ -8,8 +8,11 @@ import emu.grasscutter.server.event.HandlerPriority;
 import emu.grasscutter.server.event.entity.EntityDeathEvent;
 import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.server.event.game.ReceivePacketEvent;
-// import emu.grasscutter.server.event.game.ServerTickEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
+// import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
+// import emu.grasscutter.server.event.game.ServerTickEvent;
+// import emu.grasscutter.server.packet.send.PacketSceneEntityDisappearNotify;
+
 
 /**
  * A class containing all event handlers.
@@ -21,7 +24,7 @@ import thorny.grasscutters.MobWave.commands.MobWaveCommand;
  */
 public final class EventListener {
     public static void EntityDeathEvent(EntityDeathEvent event) {
-        if (MobWaveCommand.getMobScene() == event.getEntity().getGroupId())
+        if (MobWaveCommand.getMobSceneGroup() == event.getEntity().getGroupId())
             try {
                 //MobWaveCommand mwc = new MobWaveCommand();
                 GameEntity monster = event.getEntity();
@@ -38,12 +41,25 @@ public final class EventListener {
                 // Do nothing for now
             }
         }
-        // Temp implementation of onTimeTrigger
+        //Temp implementation of onTimeTrigger
         // public static void onTick(ServerTickEvent event) {
         // try {
         // if(MobWaveCommand.mobWaveChallenge != null){
+        //     var current = System.currentTimeMillis();
         //     // Timer trigger
-        //     MobWaveCommand.mobWaveChallenge.onCheckTimeOut();
+        //     if (MobWaveCommand.mobWaveChallenge.isProgress()) {
+        //         var listEntities = MobWaveCommand.mobWaveChallenge.getScene().getEntities();
+        //         if (current - MobWaveCommand.mobWaveChallenge.getStartedAt() > MobWaveCommand.mobWaveChallenge
+        //                 .getTimeLimit() * 1000L) {
+        //             for (GameEntity monster : listEntities.values()) {
+        //                 MobWaveCommand.mobWaveChallenge.getScene().removeEntity(monster, VisionType.VISION_TYPE_REMOVE);
+        //                 MobWaveCommand.mobWaveChallenge.getScene()
+        //                         .broadcastPacket(
+        //                                 new PacketSceneEntityDisappearNotify(monster, VisionType.VISION_TYPE_REMOVE));
+        //             }
+        //         }
+        //         MobWaveCommand.mobWaveChallenge.onCheckTimeOut();
+        //     }
         // }
         // } catch (Exception e) {
         //   }

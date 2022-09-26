@@ -2,7 +2,6 @@ package thorny.grasscutters.MobWave.commands;
 
 import emu.grasscutter.command.Command;
 import emu.grasscutter.command.CommandHandler;
-import emu.grasscutter.command.commands.SpawnCommand;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.MonsterData;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
@@ -51,8 +50,6 @@ public class MobWaveCommand implements CommandHandler {
     EntityMonster entMonster;
     MonsterData monsterData;
     ArrayList<ChallengeTrigger> cTrigger = new ArrayList<>();
-    //int level;
-    int goal;
     int alive = 0;
     String randomMob;
     boolean progress;
@@ -60,7 +57,6 @@ public class MobWaveCommand implements CommandHandler {
     int generatedCount = 0;
     public SceneGroup mobSG = new SceneGroup();
     public ScriptLib sl = new ScriptLib();
-    // public SceneSuite mobSS = new SceneSuite();
 
     public static void readFile (){         // Read file to memory
     
@@ -81,7 +77,7 @@ public class MobWaveCommand implements CommandHandler {
         int nuMobs = 5;     // Placeholder # of mobs spawned per wave
         int lvMobs = 90;    // Placeholder level of monsters spawned
         int nuWaves = 1;    // Placeholder # of waves
-        int time = 300;     // Time between waves in seconds;
+        int time = 180;     // Time between waves in seconds;
         mobSG.id = 80085;   // Set scenegroup id
         
         //for(String s : mobs)mobsInt.addAll(mobs.stream().map(Integer::valueOf).collect(Collectors.toList()));
@@ -105,16 +101,15 @@ public class MobWaveCommand implements CommandHandler {
         // Stops future waves from ocurring
         else if (args.get(0).equals("stop")) {
             try {
-                if(mobWaveChallenge.inProgress()){
+                if (mobWaveChallenge.inProgress()) {
                     removeAliveMobs();
                     mobWaveChallenge.fail();
+                    CommandHandler.sendMessage(targetPlayer, "Challenge failed!");
                 }
             } catch (Exception e) {
             }
             if (isWaves) {
                 isWaves = false;
-                CommandHandler.sendMessage(targetPlayer, 
-                    "Stopping waves!");
             } // if isWaves
             else {
                 CommandHandler.sendMessage(targetPlayer, "No queued waves to stop!");
@@ -133,7 +128,6 @@ public class MobWaveCommand implements CommandHandler {
             cTrigger.clear();
             cTrigger.add(killMob);
             cTrigger.add(timeMob);
-            goal = cMobs;
             int step=0;
             
             isWaves = true;
@@ -153,35 +147,7 @@ public class MobWaveCommand implements CommandHandler {
             mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, cMobs, cTrigger);
             mobWaveChallenge.start();
             spawnMobEntity(sender, targetPlayer, args, cMobs, cWaves, mobs, cLevel, step, paramList, time);
-            
-            
 
-            // Old method for spawning monsters
-/*              executor.scheduleAtFixedRate(() -> {
-
-                // Spawn wave
-                if (isWaves) {
-                    spawnWaves(sender, targetPlayer, args, cMobs, cWaves, clistMobs, cLevel);
-                    incrementWaves();
-                } // else
-
-                // Check if there are waves remaining
-                if (!checkWave(cWaves) || !isWaves) {
-                    executor.shutdown();
-                    CommandHandler.sendMessage(targetPlayer, "Custom waves finished.");
-                    isWaves = false;
-                    n = 0;
-                    return;
-                } // if
-
-            }, 0, time, TimeUnit.SECONDS);
-*/
-            // Send wave time message
-            // if(cWaves > 1){
-            // CommandHandler.sendMessage(targetPlayer,
-            //         "Custom waves started! You have " + time + " seconds before the next wave starts!");
-            // }
-            
         } // create
 
         else if (args.get(0).equals("start")) {
@@ -201,7 +167,6 @@ public class MobWaveCommand implements CommandHandler {
 
         return;
     }
-// Old method no longer in use
     //Increase wave counter after wave is spawned
     private void incrementWaves() {
         n++;
@@ -218,42 +183,6 @@ public class MobWaveCommand implements CommandHandler {
             return true;
         }
     }// checkWave
-// **
-    // Uses old var name refs but works as intended
-    public void spawnWaves(Player sender, Player targetPlayer, List<String> args, int nuMobs, int nuWaves,
-            List<String> mobs, int mLevel) {
-        Random pRandom = new Random();
-        for (int i = 0; nuMobs > i; i++) {
-            String randomMob = mobs.get(pRandom.nextInt(mobs.size()));
-            args.clear();           // Clean the list
-            args.add(0, randomMob); // Add mobId to command
-            args.add("x1");         // Number of each mob spawned per randomly selected mob id
-            args.add("lv"+Integer.toString(mLevel)); // Mob level
-            spawnMob(sender, targetPlayer, args);    // Send to spawn mob
-        } // nuMobs
-    } // spawnWaves
-
-    public void spawnMob(Player sender, Player targetPlayer, List<String> args) {
-        SpawnCommand sMob = new SpawnCommand();     // Call SpawnCommand to make monster
-        sMob.execute(sender, targetPlayer, args);   // Spawn the mob
-    }// spawnMob
-
-    public void createMobList(int nuMobs, Player targetPlayer, int cLevel, List<String> mobs){
-        for(int t = 0; t < nuMobs; t++){
-        Random pRandom = new Random();
-        String randomMob = mobs.get(pRandom.nextInt(mobs.size()));
-        mobsInt.add(Integer.parseInt(randomMob));
-        setEntities(randomMob, targetPlayer, cLevel);
-        }
-    }
-    
-    public EntityMonster setEntities(String randomMob, Player targetpPlayer, int cLevel){
-        monsterData = setMonsterData(); 
-        EntityMonster entMonster = new EntityMonster(targetpPlayer.getScene(), monsterData, targetpPlayer.getPosition(), cLevel);
-        monsters.add(entMonster);
-        setMonsters(monsters);
-        return entMonster;
-    }
 
     public MonsterData setMonsterData(){
         Random pRandom = new Random();
@@ -293,7 +222,7 @@ public class MobWaveCommand implements CommandHandler {
         return count;
     }
     // Return for event listener
-	public static int getMobScene() {
+	public static int getMobSceneGroup() {
 		return 80085;
 	}
     // Spawn the monsters
@@ -309,18 +238,23 @@ public class MobWaveCommand implements CommandHandler {
 		Scene scene = targetPlayer.getScene();
 		Position pos = targetPlayer.getPosition();
         newMonsters.clear();
+        exceedTime(targetPlayer);
         
+        // Check to spawn
 		if (getAliveMonstersCount() <= 2) {
-
             // Check if waves are completed and shutdown if so
             if (!checkWave(nuWaves) || !isWaves) {
                 executor.shutdown();
-                CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
+                activeMonsters.clear();
+                if(nuWaves > 1 && n > 1){
+                    CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
+                }
                 isWaves = false;
                 resetWaves();
                 return;
             } // if
 
+            // Spawns mobs if waves remain and challenge is active
 			if (generatedCount < goal && isWaves) {
 				for (int i = 0; i < goal; i++) {
 					MonsterData monsterData = setMonsterData();
@@ -338,7 +272,7 @@ public class MobWaveCommand implements CommandHandler {
             if(nuWaves > 1){
                 if(mobWaveChallenge.isSuccess() && n < nuWaves && isWaves){
                     generatedCount=0;
-                    mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs, cTrigger);
+                    mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 183, 183, paramList, time, nuMobs, cTrigger);
                     mobWaveChallenge.start();
                     executor.shutdown();
                     spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, mobs, mLevel, step, paramList, time);
@@ -347,4 +281,19 @@ public class MobWaveCommand implements CommandHandler {
 		}
         }, 0, 1, TimeUnit.SECONDS);
 	}
+
+    // New implementation of timer
+    public boolean exceedTime(Player targetPlayer) {
+        var current = System.currentTimeMillis();
+        CommandHandler.sendMessage(targetPlayer, "Ran out of time!");
+        if (current - mobWaveChallenge.getStartedAt() > mobWaveChallenge
+                .getTimeLimit() * 1000L) {
+            isWaves = false;
+            removeAliveMobs();
+            mobWaveChallenge.fail();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
