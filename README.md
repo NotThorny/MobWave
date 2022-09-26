@@ -7,6 +7,8 @@ There will probably be issues if you don't use the commands as intended so follo
 
 Don't blame me if you spawn 100000 mobs and crash your game/server.
 
+If time runs out all monsters from the wave will despawn and any remaining waves will be failed.
+
 ## Installation
 
 Get latest release from releases
@@ -19,13 +21,13 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
    -Will generate one wave of 5 random enemies at level 90.
 
- `/mw create [# of waves] [# of monsters] [level of monsters]`
+ `/mw create [# of waves] [# of monsters] [level of monsters] [OPTIONAL: wave time in seconds]`
 
    -Create a custom set of waves, each wave will start automatically when the previous one ends.
 
 `/mw stop`
 
-   -Stops any further scheduled waves from happening.
+   -Stops any further scheduled waves from happening and removes any already spawned monsters.
 
 `/mw suffer`
 
@@ -39,8 +41,8 @@ This uses the Grasscutters plugin template for 1.3.1.
 
 ## Issues
 
--Timer does not work (visual only).
+-Timer works but visual on-screen timer does not update.
 
--No graphic on completion.
+-No graphic on success/fail.
 
 -Additional spawn modifiers added in 1.3.1 'extended spawn command' update are not applicable.
