@@ -18,7 +18,6 @@ import emu.grasscutter.data.GameData;
 
 import thorny.grasscutters.MobWave.sufferHandler;
 import emu.grasscutter.scripts.data.SceneGroup;
-
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.Grasscutter;
 
@@ -98,6 +97,7 @@ public class MobWaveCommand implements CommandHandler {
                     removeAliveMobs();
                     mobWaveChallenge.fail();
                     CommandHandler.sendMessage(targetPlayer, "Challenge failed!");
+                    return;
                 } // if
             } catch (Exception e) {
             } // catch
@@ -116,9 +116,15 @@ public class MobWaveCommand implements CommandHandler {
             int cMobs = Integer.parseInt(args.get(2));
             int cLevel = Integer.parseInt(args.get(3));
 
-            // Make sure valid number of waves
+            // Make sure valid arguments
             if (cWaves < 1) {
-                cWaves = 1;
+                cWaves = nuWaves;
+            } // if
+            if(cMobs < 1){
+                cMobs = nuMobs;
+            } // if
+            if(cLevel < 0 || cLevel > 200){
+                cLevel = lvMobs;
             } // if
 
             // Set triggers
@@ -263,15 +269,12 @@ public class MobWaveCommand implements CommandHandler {
             } // if
 
             // Check to spawn
-            if (getAliveMonstersCount() <= 2) {
+            if (getAliveMonstersCount() <= 0) {
                 // Check if waves are completed and shutdown if so
                 if (!isWaves || !checkWave(nuWaves)) {
+                    CommandHandler.sendMessage(targetPlayer, "Challenge finished!");
                     executor.shutdown();
                     activeMonsters.clear();
-                    if (nuWaves > 1 && n > 1 && !exceedTime(targetPlayer)) {
-                        // Only send when time has not exceeded and there are multiple waves
-                        CommandHandler.sendMessage(targetPlayer, "Last wave nearing end!");
-                    } // if
                     isWaves = false;
                     resetWaves();
                     return;
@@ -286,19 +289,22 @@ public class MobWaveCommand implements CommandHandler {
                         newMonsters.add(entity);
                         generatedCount++;
                     } // for
+                    setMonsters(newMonsters);
+                    incrementWaves();
+
                     if(nuWaves == 1){
                         isWaves = false;
                     }
-                    setMonsters(newMonsters);
-                    incrementWaves();
+                    
                 } // if
                 newMonsters.clear();
 
                 // Check if there are waves remaining and spawn if last wave finished
                 if (nuWaves > 1) {
-                    if (mobWaveChallenge.isSuccess() && n < nuWaves) {
+                    if (mobWaveChallenge.isSuccess()) {
                         generatedCount = 0;
                         executor.shutdown();
+                        mobSG.setId(80085);
                         mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time,
                                 nuMobs, cTrigger);
                         mobWaveChallenge.start();
@@ -311,7 +317,7 @@ public class MobWaveCommand implements CommandHandler {
     } // spawnMobEntity
 
     // Check if wave has exceeded time limit
-    public boolean exceedTime(Player targetPlayer) {
+    private boolean exceedTime(Player targetPlayer) {
         var current = System.currentTimeMillis();
         // If time is exceeded
         if (current - mobWaveChallenge.getStartedAt() > mobWaveChallenge

@@ -21,14 +21,9 @@ public final class MobWave extends Plugin {
                 .priority(HandlerPriority.NORMAL)
                 .listener(EventListener::EntityDeathEvent)
                 .register(this);
-        new EventHandler<>(ReceivePacketEvent.class)
-                .priority(HandlerPriority.NORMAL)
-                .listener(EventListener::onPacket)
-                .register(this);
-        // Temp implementation of onTimeTrigger
-        // new EventHandler<>(ServerTickEvent.class)
+        // new EventHandler<>(ReceivePacketEvent.class)
         //         .priority(HandlerPriority.NORMAL)
-        //         .listener(EventListener::onTick)
+        //         .listener(EventListener::onPacket)
         //         .register(this);
         // Register commands.
         this.getHandle().registerCommand(new thorny.grasscutters.MobWave.commands.MobWaveCommand());

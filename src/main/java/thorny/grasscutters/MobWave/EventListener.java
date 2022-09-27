@@ -9,9 +9,6 @@ import emu.grasscutter.server.event.entity.EntityDeathEvent;
 import emu.grasscutter.net.packet.PacketOpcodes;
 import emu.grasscutter.server.event.game.ReceivePacketEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
-// import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
-// import emu.grasscutter.server.event.game.ServerTickEvent;
-// import emu.grasscutter.server.packet.send.PacketSceneEntityDisappearNotify;
 
 
 /**
@@ -36,32 +33,10 @@ public final class EventListener {
                 throw new RuntimeException(e);
             }
         }
-        public static void onPacket(ReceivePacketEvent event) {
-            if (event.getPacketId() == PacketOpcodes.DungeonChallengeFinishNotify){
-                // Do nothing for now
-            }
-        }
-        //Temp implementation of onTimeTrigger
-        // public static void onTick(ServerTickEvent event) {
-        // try {
-        // if(MobWaveCommand.mobWaveChallenge != null){
-        //     var current = System.currentTimeMillis();
-        //     // Timer trigger
-        //     if (MobWaveCommand.mobWaveChallenge.isProgress()) {
-        //         var listEntities = MobWaveCommand.mobWaveChallenge.getScene().getEntities();
-        //         if (current - MobWaveCommand.mobWaveChallenge.getStartedAt() > MobWaveCommand.mobWaveChallenge
-        //                 .getTimeLimit() * 1000L) {
-        //             for (GameEntity monster : listEntities.values()) {
-        //                 MobWaveCommand.mobWaveChallenge.getScene().removeEntity(monster, VisionType.VISION_TYPE_REMOVE);
-        //                 MobWaveCommand.mobWaveChallenge.getScene()
-        //                         .broadcastPacket(
-        //                                 new PacketSceneEntityDisappearNotify(monster, VisionType.VISION_TYPE_REMOVE));
-        //             }
-        //         }
-        //         MobWaveCommand.mobWaveChallenge.onCheckTimeOut();
+        // Does not work!
+        // public static void onPacket(ReceivePacketEvent event) {
+        //     if (event.getPacketId() == PacketOpcodes.DungeonChallengeFinishNotify){
+        //         // Do nothing for now
         //     }
-        // }
-        // } catch (Exception e) {
-        //   }
         // }
 }
