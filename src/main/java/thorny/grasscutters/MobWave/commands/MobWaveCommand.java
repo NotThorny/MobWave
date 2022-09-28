@@ -70,8 +70,8 @@ public class MobWaveCommand implements CommandHandler {
         // Wave and mob default settings
         int nuMobs = 5;     // Number of mobs spawned per wave
         int lvMobs = 90;    // Level of monsters spawned
-        int nuWaves = 1;    // Number of waves
-        int time = 180;     // Time between waves in seconds;
+        int nuWaves = 999;  // Number of waves
+        int time = 300;     // Time between waves in seconds
         mobSG.id = 80085;   // Scenegroup id
 
         if (args.size() < 1) {
@@ -96,7 +96,7 @@ public class MobWaveCommand implements CommandHandler {
                 if (mobWaveChallenge.inProgress()) {
                     removeAliveMobs();
                     mobWaveChallenge.fail();
-                    CommandHandler.sendMessage(targetPlayer, "Challenge failed!");
+                    CommandHandler.sendMessage(targetPlayer, "Challenge stopped!");
                     return;
                 } // if
             } catch (Exception e) {

@@ -11,7 +11,7 @@ If time runs out all monsters from the wave will despawn and any remaining waves
 
 ## Installation
 
-Get latest release from releases
+Get latest release from [releases](https://github.com/NotThorny/MobWave/releases)
 
 Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server if it was already running
 
@@ -19,7 +19,7 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
  `/mw start`
 
-   -Will generate one wave of 5 random enemies at level 90.
+   -Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
 
  `/mw create [# of waves] [# of monsters] [level of monsters] [OPTIONAL: wave time in seconds]`
 
@@ -33,13 +33,15 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
   -Suffer and probably die immediately.
 
-  Thanks @snoobi-seggs for the contribution to making suffer happen.
+  Thanks [@snoobi-seggs](https://github.com/snoobi-seggs) for making suffer happen.
 
 ## Version
 
 This uses the Grasscutters plugin template for 1.3.1.
 
-## Issues
+### Issues
+
+#### Any suggestions or issues are welcomed in [issues](https://github.com/NotThorny/MobWave/issues)
 
 -Timer works but visual on-screen timer does not update.
 

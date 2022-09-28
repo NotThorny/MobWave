@@ -33,7 +33,7 @@ public final class EventListener {
                 throw new RuntimeException(e);
             }
         }
-        // Does not work!
+        // Does not work or my skill issue in implementing
         // public static void onPacket(ReceivePacketEvent event) {
         //     if (event.getPacketId() == PacketOpcodes.DungeonChallengeFinishNotify){
         //         // Do nothing for now
