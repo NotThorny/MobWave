@@ -21,7 +21,7 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
    -Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
 
- `/mw create [# of waves] [# of monsters] [level of monsters] [OPTIONAL: wave time in seconds]`
+ `/mw create [# of waves] [# monsters per wave] [level of monsters] [OPTIONAL: wave time in seconds]`
 
    -Create a custom set of waves, each wave will start automatically when the previous one ends.
 
@@ -37,7 +37,7 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 ## Version
 
-This uses the Grasscutters plugin template for 1.3.1.
+This uses the Grasscutters plugin template for 1.3.2.
 
 ### Issues
 

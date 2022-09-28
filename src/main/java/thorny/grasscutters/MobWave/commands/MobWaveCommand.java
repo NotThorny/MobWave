@@ -30,8 +30,8 @@ import java.util.*;
 import java.io.*;
 
 // Command usage
-@Command(label = "mobwave", aliases = "mw", usage = "start/stop \n /mw create [# waves] [# mobs] [level] [wave time in sec]"
-        + "\n Wave time is optional and will default to 180 seconds if not specified")
+@Command(label = "mobwave", aliases = "mw", usage = "start/stop \n /mw create [# waves] [# mobs per wave] [level] [wave time in sec]"
+        + "\n Wave time is optional and will default to 300 seconds if not specified")
 public class MobWaveCommand implements CommandHandler {
     public static WorldChallenge mobWaveChallenge;
 
@@ -105,7 +105,7 @@ public class MobWaveCommand implements CommandHandler {
                 isWaves = false;
             } // if isWaves
             else {
-                CommandHandler.sendMessage(targetPlayer, "No queued waves to stop!");
+                CommandHandler.sendMessage(targetPlayer, "No waves to stop!");
             } // else
         } // stop
 
