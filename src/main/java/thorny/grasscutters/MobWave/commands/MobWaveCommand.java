@@ -96,7 +96,8 @@ public class MobWaveCommand implements CommandHandler {
                 if (mobWaveChallenge.inProgress()) {
                     removeAliveMobs();
                     mobWaveChallenge.fail();
-                    CommandHandler.sendMessage(targetPlayer, "Challenge stopped!");
+                    isWaves = false;
+                    CommandHandler.sendMessage(targetPlayer, "Waves stopped!");
                     return;
                 } // if
             } catch (Exception e) {
