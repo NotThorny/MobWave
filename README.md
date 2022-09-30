@@ -25,6 +25,10 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
    -Create a custom set of waves, each wave will start automatically when the previous one ends.
 
+`/mw skip`
+
+  -Skips the current wave
+
 `/mw stop`
 
    -Stops any further scheduled waves from happening and removes any already spawned monsters.
