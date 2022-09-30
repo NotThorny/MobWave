@@ -1,4 +1,4 @@
-# MobSpawn Basics
+# MobWave Basics
 
 This is a simple plugin to easily generate "waves" of random enemies to fight.
 This pulls from a *nearly* complete list of monsters. Too many bosses were spawning so I removed a bunch.
