@@ -90,6 +90,11 @@ public class MobWaveCommand implements CommandHandler {
             sufferNow.sufferExecutor(targetPlayer, targetPlayer, args);
         } // else if suffer
 
+        else if (args.get(0).equals("skip")) {
+            removeAliveMobs();
+            mobWaveChallenge.setSuccess(true);
+        } // else if skip
+
         // Stops future waves from ocurring
         else if (args.get(0).equals("stop")) {
             try {
@@ -228,6 +233,9 @@ public class MobWaveCommand implements CommandHandler {
     // Get count of alive monsters
     public int getAliveMonstersCount() {
         int count = 0;
+        if(activeMonsters.isEmpty()){
+            return 0;
+        }
         for (EntityMonster monster : activeMonsters) {
             if (monster.isAlive()) {
                 count++;
