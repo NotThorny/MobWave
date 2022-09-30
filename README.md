@@ -17,25 +17,20 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 ## Usage
 
- `/mw start`
+`/mw start`
+- Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
 
-   -Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
-
- `/mw create [# of waves] [# monsters per wave] [level of monsters] [OPTIONAL: wave time in seconds]`
-
-   -Create a custom set of waves, each wave will start automatically when the previous one ends.
-
+`/mw create [# of waves] [# monsters per wave] [level of monsters] [OPTIONAL: wave time in seconds]`
+- Create a custom set of waves, each wave will start automatically when the previous one ends.
+   
 `/mw skip`
-
-  -Skips the current wave
+- Skips the current wave
 
 `/mw stop`
-
-   -Stops any further scheduled waves from happening and removes any already spawned monsters.
+- Stops any further scheduled waves from happening and removes any already spawned monsters.
 
 `/mw suffer`
-
-  -Suffer and probably die immediately.
+- Suffer and probably die immediately.
 
   Thanks [@snoobi-seggs](https://github.com/snoobi-seggs) for making suffer happen.
 
