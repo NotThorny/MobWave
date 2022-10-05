@@ -93,6 +93,7 @@ public class MobWaveCommand implements CommandHandler {
         else if (args.get(0).equals("skip")) {
             removeAliveMobs();
             mobWaveChallenge.setSuccess(true);
+            CommandHandler.sendMessage(targetPlayer, "Wave skipped!");
         } // else if skip
 
         // Stops future waves from ocurring
