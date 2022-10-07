@@ -1,4 +1,4 @@
-# MobSpawn Basics
+# MobWave Basics
 
 This is a simple plugin to easily generate "waves" of random enemies to fight.
 This pulls from a *nearly* complete list of monsters. Too many bosses were spawning so I removed a bunch.
@@ -33,16 +33,13 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
    -If you want a custom time but not a custom wave type, put `none` for wave type and then add your time.
 
 `/mw skip`
-
-  -Skips the current wave
+- Skips the current wave
 
 `/mw stop`
-
-   -Stops any further scheduled waves from happening and removes any already spawned monsters.
+- Stops any further scheduled waves from happening and removes any already spawned monsters.
 
 `/mw suffer`
-
-  -Suffer and probably die immediately.
+- Suffer and probably die immediately.
 
   Thanks [@snoobi-seggs](https://github.com/snoobi-seggs) for making suffer happen.
 
