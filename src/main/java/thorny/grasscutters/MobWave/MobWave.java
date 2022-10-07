@@ -1,10 +1,11 @@
 package thorny.grasscutters.MobWave;
 
+import java.io.IOException;
+
 import emu.grasscutter.plugin.Plugin;
 import emu.grasscutter.server.event.EventHandler;
 import emu.grasscutter.server.event.HandlerPriority;
 import emu.grasscutter.server.event.entity.EntityDeathEvent;
-import emu.grasscutter.server.event.game.ReceivePacketEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 public final class MobWave extends Plugin {
@@ -32,7 +33,11 @@ public final class MobWave extends Plugin {
         this.getLogger().info("The MobWave plugin has been enabled.");
 
         // Read file to memory
-        MobWaveCommand.readFile();
+        try {
+            MobWaveCommand.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override public void onDisable() {

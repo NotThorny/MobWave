@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "20010101",
+    "Name": "Dendro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010201",
+    "Name": "Large Dendro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010301",
+    "Name": "Anemo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010401",
+    "Name": "Large Anemo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010501",
+    "Name": "Electro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010601",
+    "Name": "Large Electro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010701",
+    "Name": "Mutant Electro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010801",
+    "Name": "Cryo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20010901",
+    "Name": "Large Cryo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011001",
+    "Name": "Hydro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011101",
+    "Name": "Large Hydro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011201",
+    "Name": "Pyro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011301",
+    "Name": "Large Pyro Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011401",
+    "Name": "Geo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20011501",
+    "Name": "Large Geo Slime",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20020101",
+    "Name": "Eye of the Storm",
+    "Type": "elite",
+    "Chance": "25"
+  },
+  {
+    "id": "20040101",
+    "Name": "Electro Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20040201",
+    "Name": "Anemo Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20040301",
+    "Name": "Geo Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20040401",
+    "Name": "Hydro Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20040501",
+    "Name": "Cryo Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20040601",
+    "Name": "Pyro Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "20050102",
+    "Name": "Oceanid",
+    "Type": "boss",
+    "Chance": "40"
+  },
+  {
+    "id": "20050201",
+    "Name": "Oceanid Boar",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050301",
+    "Name": "Oceanid Crane",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050401",
+    "Name": "Oceanid Crab",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050501",
+    "Name": "Oceanid Finch",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050601",
+    "Name": "Oceanid Mallard",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050701",
+    "Name": "Oceanid Ferret",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050801",
+    "Name": "Oceanid Frog",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20050901",
+    "Name": "Oceanid Raptor",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060101",
+    "Name": "Hydro Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060201",
+    "Name": "Geo Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060301",
+    "Name": "Anemo Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060401",
+    "Name": "Cryo Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060501",
+    "Name": "Electro Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20060601",
+    "Name": "Pyro Specter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26120301",
+    "Name": "Hydro Mushroom",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26120201",
+    "Name": "Cryo Mushroom",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26120101",
+    "Name": "Dendro Mushroom",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "20070101",
+    "Name": "Thunder Manifestation",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "21010101",
+    "Name": "Hilichurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010201",
+    "Name": "Hilichurl Fighter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010301",
+    "Name": "Wooden Shield Hilichurl Guard",
+    "Type": "elite",
+    "Chance": "100"
+  },
+  {
+    "id": "21010401",
+    "Name": "Hilichurl Shooter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010501",
+    "Name": "Pyro Hilichurl Shooter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010601",
+    "Name": "Hilichurl Grenadier",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010701",
+    "Name": "Hilichurl Berserker",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21010901",
+    "Name": "Cryo Hilichurl Shooter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011001",
+    "Name": "Electro Hilichurl Shooter",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011201",
+    "Name": "Rock Shield Hilichurl Guard",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011301",
+    "Name": "Cryo Hilichurl Grenadier",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011401",
+    "Name": "Ice Shield Hilichurl Guard",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011501",
+    "Name": "Unusual Unarmed Hilichurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21011601",
+    "Name": "Electro Hilichurl Grenadier",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21020101",
+    "Name": "Wooden Shieldwall Mitachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020201",
+    "Name": "Blazing Axe Mitachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020301",
+    "Name": "Rock Shieldwall Mitachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020401",
+    "Name": "Frostarm Lawachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020501",
+    "Name": "Stonehide Lawachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020601",
+    "Name": "Ice Shieldwall Mitachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020701",
+    "Name": "Crackling Axe Mitachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21020801",
+    "Name": "Thunderhelm Lawachurl",
+    "Type": "elite",
+    "Chance": "75"
+  },
+  {
+    "id": "21030101",
+    "Name": "Hydro Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21030201",
+    "Name": "Dendro Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21030301",
+    "Name": "Anemo Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21030401",
+    "Name": "Geo Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21030501",
+    "Name": "Cryo Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "21030601",
+    "Name": "Electro Samachurl",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "22010101",
+    "Name": "Pyro Abyss Mage",
+    "Type": "elite",
+    "Chance": "95"
+  },
+  {
+    "id": "22010201",
+    "Name": "Cryo Abyss Mage",
+    "Type": "elite",
+    "Chance": "85"
+  },
+  {
+    "id": "22010301",
+    "Name": "Hydro Abyss Mage",
+    "Type": "elite",
+    "Chance": "90"
+  },
+  {
+    "id": "22010401",
+    "Name": "Electro Abyss Mage",
+    "Type": "elite",
+    "Chance": "90"
+  },
+  {
+    "id": "22020101",
+    "Name": "Abyss Herald: Wicked Torrents",
+    "Type": "boss",
+    "Chance": "45"
+  },
+  {
+    "id": "22030101",
+    "Name": "Abyss Lector: Violet Lightning",
+    "Type": "boss",
+    "Chance": "45"
+  },
+  {
+    "id": "22030201",
+    "Name": "Abyss Lector: Fathomless Flames",
+    "Type": "boss",
+    "Chance": "45"
+  },
+  {
+    "id": "22040101",
+    "Name": "Rockfond Rifthound Whelp",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "22040201",
+    "Name": "Thundercraven Rifthound Whelp",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "22050101",
+    "Name": "Rockfond Rifthound",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22050201",
+    "Name": "Thundercraven Rifthound",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22060101",
+    "Name": "Golden Wolflord",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "22070101",
+    "Name": "Shadowy Husk: Standard Bearer",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22070201",
+    "Name": "Shadowy Husk: Line Breaker",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22070301",
+    "Name": "Shadowy Husk: Defender",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22080101",
+    "Name": "Black Serpent Knight: Windcutter",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "22090101",
+    "Name": "Black Serpent Knight?",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23010101",
+    "Name": "Fatui Skirmisher - Cryogunner Legionnaire",
+    "Type": "elite",
+    "Chance": "65"
+  },
+  {
+    "id": "23010201",
+    "Name": "Fatui Skirmisher - Hydrogunner Legionnaire",
+    "Type": "elite",
+    "Chance": "65"
+  },
+  {
+    "id": "23010301",
+    "Name": "Fatui Skirmisher - Electrohammer Vanguard",
+    "Type": "elite",
+    "Chance": "65"
+  },
+  {
+    "id": "23010401",
+    "Name": "Fatui Skirmisher - Geochanter Bracer",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23010501",
+    "Name": "Fatui Skirmisher - Anemoboxer Vanguard",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23010601",
+    "Name": "Fatui Skirmisher - Pyroslinger Bracer",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23020101",
+    "Name": "Fatui Pyro Agent",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23020102",
+    "Name": "Fatui Pyro Agent?",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23030101",
+    "Name": "Fatui Electro Cicin Mage",
+    "Type": "elite",
+    "Chance": "70"
+  },
+  {
+    "id": "23040101",
+    "Name": "Fatui Cryo Cicin Mage",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "23050101",
+    "Name": "Mirror Maiden",
+    "Type": "elite",
+    "Chance": "70"
+  },
+  {
+    "id": "24010101",
+    "Name": "Ruin Guard",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "24010201",
+    "Name": "Ruin Hunter",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "24010301",
+    "Name": "Ruin Grader",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "24010401",
+    "Name": "Ruin Serpent",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "24020101",
+    "Name": "Ruin Cruiser",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "24020201",
+    "Name": "Ruin Destroyer",
+    "Type": "elite",
+    "Chance": "60"
+  },
+  {
+    "id": "24020301",
+    "Name": "Ruin Defender",
+    "Type": "elite",
+    "Chance": "65"
+  },
+  {
+    "id": "24020401",
+    "Name": "Ruin Scout",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "24030201",
+    "Name": "Ruin Gargoyle",
+    "Type": "elite",
+    "Chance": "60"
+  },
+  {
+    "id": "24030101",
+    "Name": "Perpetual Mechanical Array",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "25010101",
+    "Name": "Liuliu",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010102",
+    "Name": "Mystery Man?",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010103",
+    "Name": "Treasure Hoarders: Liuliu",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010201",
+    "Name": "Treasure Hoarders: Scout",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010301",
+    "Name": "Treasure Hoarders: Pyro Potioneer",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010401",
+    "Name": "Treasure Hoarders: Hydro Potioneer",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010501",
+    "Name": "Treasure Hoarders: Electro Potioneer",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010601",
+    "Name": "Treasure Hoarders: Cryo Potioneer",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25010701",
+    "Name": "Treasure Hoarders: Handyman",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25020101",
+    "Name": "Treasure Hoarders: Raptor",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25020102",
+    "Name": "Treasure Hoarders: Raptor????",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25020201",
+    "Name": "Treasure Hoarders: Marksman",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25030101",
+    "Name": "Treasure Hoarders: Carmen",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25030201",
+    "Name": "Treasure Hoarders: Gravedigger",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25030301",
+    "Name": "Treasure Hoarders: Oarsman",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25040101",
+    "Name": "Treasure Hoarders: boss",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25050101",
+    "Name": "Milelith Soldier",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25050201",
+    "Name": "Milelith Sergeant",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25050301",
+    "Name": "Shogunate Infantry",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25050401",
+    "Name": "Shogunate Infantry Captain",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25050501",
+    "Name": "Sangonomiya Cohort?",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25060101",
+    "Name": "Treasure Hoarders: Pugilist",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25070101",
+    "Name": "Treasure Hoarders: Crusher",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25070202",
+    "Name": "Treasure Hoarders: Wallenstein",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25080101",
+    "Name": "Nobushi: Jintouban",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25080201",
+    "Name": "Nobushi: Hitsukeban",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25080301",
+    "Name": "Nobushi: kikouban",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25080401",
+    "Name": "Yoriki Samurai",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25090101",
+    "Name": "Maguu Kenki",
+    "Type": "boss",
+    "Chance": "70"
+  },
+  {
+    "id": "25090102",
+    "Name": "Maguu Kenki:Wind Bunshin",
+    "Type": "boss",
+    "Chance": "55"
+  },
+  {
+    "id": "25090103",
+    "Name": "Maguu Kenki:Ice Bunshin",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "25090104",
+    "Name": "Maguu Kenki:Masked Bunshin",
+    "Type": "boss",
+    "Chance": "55"
+  },
+  {
+    "id": "25090201",
+    "Name": "Maguu Kenki:Lone Gale",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "25090401",
+    "Name": "Maguu Kenki:Mask of Terror",
+    "Type": "boss",
+    "Chance": "55"
+  },
+  {
+    "id": "25090301",
+    "Name": "Maguu Kenki:Galloping Frost",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "25100101",
+    "Name": "Kairagi: Dancing Thunder",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "25100201",
+    "Name": "Kairagi: Fiery Might",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "25100301",
+    "Name": "Ochimusha: Ensorcelled Thunder",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "25100401",
+    "Name": "Ochimusha: Cankered Flame",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26010101",
+    "Name": "Cryo Whopperflower?",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26010102",
+    "Name": "Cryo Whopperflower?",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26010103",
+    "Name": "Cryo Whopperflower?",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26010104",
+    "Name": "Cryo Whopperflower?",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26010201",
+    "Name": "Pyro Whopperflower",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26010301",
+    "Name": "Electro Whopperflower",
+    "Type": "elite",
+    "Chance": "35"
+  },
+  {
+    "id": "26020101",
+    "Name": "Cryo Regisvine",
+    "Type": "boss",
+    "Chance": "40"
+  },
+  {
+    "id": "26020201",
+    "Name": "Pyro Regisvine",
+    "Type": "boss",
+    "Chance": "40"
+  },
+  {
+    "id": "26020301",
+    "Name": "Electro Regisvine",
+    "Type": "boss",
+    "Chance": "40"
+  },
+  {
+    "id": "26030101",
+    "Name": "Geovishap Hatchling",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26040101",
+    "Name": "Geovishap (Hydro)",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "26040102",
+    "Name": "Geovishap (Pyro)",
+    "Type": "elite",
+    "Chance": "55"
+  },
+  {
+    "id": "26040103",
+    "Name": "Geovishap (Cryo)",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26040104",
+    "Name": "Geovishap (Electro)",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26040105",
+    "Name": "Geovishap?",
+    "Type": "elite",
+    "Chance": "65"
+  },
+  {
+    "id": "26050101",
+    "Name": "Primo Geovishap (Hydro)",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "26050201",
+    "Name": "Primo Geovishap (Hydro)",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "26050301",
+    "Name": "Primo Geovishap (Hydro)",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "26050401",
+    "Name": "Primo Geovishap (Hydro)",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "26050501",
+    "Name": "Primo Geovishap?",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
+    "id": "26050601",
+    "Name": "Primodial Bathysmal Vishap",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26050701",
+    "Name": "Rimebiter Bathysmal Vishap",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26050801",
+    "Name": "Bolteater Bathysmal Vishap",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26050901",
+    "Name": "Primodial Bathysmal Vishap?",
+    "Type": "elite",
+    "Chance": "50"
+  },
+  {
+    "id": "26051001",
+    "Name": "Primodial Bathysmal Vishap Hatchling",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26051101",
+    "Name": "Bolteater Bathysmal Vishap Hatchling",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26060101",
+    "Name": "Electro Cicin",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26060201",
+    "Name": "Hydro Cicin",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26060301",
+    "Name": "Cryo Cicin",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26080101",
+    "Name": "Beisht",
+    "Type": "boss",
+    "Chance": "1"
+  },
+  {
+    "id": "26090101",
+    "Name": "Floating Hydro Fungus",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "26110101",
+    "Name": "Jadeplume Terrorshroom",
+    "Type": "boss",
+    "Chance": "100"
+  },
+  {
+    "id": "29020101",
+    "Name": "Boreas",
+    "Type": "boss",
+    "Chance": "80"
+  },
+  {
+    "id": "29020102",
+    "Name": "Lupus Boreas?",
+    "Type": "boss",
+    "Chance": "25"
+  },
+  {
+    "id": "29030101",
+    "Name": "Childe",
+    "Type": "boss",
+    "Chance": "25"
+  },
+  {
+    "id": "29030102",
+    "Name": "Childe - Delusion",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "29030103",
+    "Name": "Childe - 11th of Fatui",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "29050101",
+    "Name": "La Signora (Cryo)",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "29050102",
+    "Name": "La Signora (Pyro)",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "29060101",
+    "Name": "Raiden Shogun",
+    "Type": "boss",
+    "Chance": "80"
+  },
+  {
+    "id": "29060102",
+    "Name": "Raiden Ei?",
+    "Type": "boss",
+    "Chance": "50"
+  },
+  {
+    "id": "29060201",
+    "Name": "Magatsu Mitake Narukami no Mikoto",
+    "Type": "boss",
+    "Chance": "60"
+  },
+  {
+    "id": "25210204",
+    "Name": "Desert bandit",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25210105",
+    "Name": "Desert bandit?",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25210306",
+    "Name": "Desert Guard",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25210504",
+    "Name": "Deser Pirate",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "25310201",
+    "Name": "Desert Cryo",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "29040101",
+    "Name": "Azhdaha (Pyro, Electro)",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "29040102",
+    "Name": "Azhdaha (Hydro, Electro)",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "29040103",
+    "Name": "Azhdaha (Pyro, Cryo)",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "29040104",
+    "Name": "Azhdaha (Hydro, Cryo)",
+    "Type": "boss",
+    "Chance": "35"
+  },
+  {
+    "id": "29040111",
+    "Name": "Azhdaha",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "24030301",
+    "Name": "BlightDrake",
+    "Type": "boss",
+    "Chance": "65"
+  },
+  {
+    "id": "24040101",
+    "Name": "Primal Construct: Repulsor",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "24040201",
+    "Name": "Primal Construct: Reshaper",
+    "Type": "common",
+    "Chance": "100"
+  },
+  {
+    "id": "24040301",
+    "Name": "Primal Construct: Prospector",
+    "Type": "common",
+    "Chance": "100"
+  }
+]

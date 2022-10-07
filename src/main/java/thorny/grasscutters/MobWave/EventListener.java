@@ -6,8 +6,6 @@ import emu.grasscutter.game.props.EntityType;
 import emu.grasscutter.server.event.EventHandler;
 import emu.grasscutter.server.event.HandlerPriority;
 import emu.grasscutter.server.event.entity.EntityDeathEvent;
-import emu.grasscutter.net.packet.PacketOpcodes;
-import emu.grasscutter.server.event.game.ReceivePacketEvent;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 
