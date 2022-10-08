@@ -28,6 +28,7 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
    - Create a custom set of waves, each wave will start automatically when the previous one ends.
 
    - Additional optional settings: t[type] s[wave time in seconds] hp[hp] atk[atk] def[def]
+   - **Order does not matter, so feel free to use as many or as few of the modifiers you want and in any order**
 
    Types for custom waves are 1 (commmon mobs), 2 (elite mobs), and 3 (boss mobs). 
 
