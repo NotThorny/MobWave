@@ -22,13 +22,17 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
    - Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
    - First wave is 4 common and 1 elite mob, every 5th wave is a boss wave of 1 boss, 2 elites, and 2 commons, and every other wave is 3 common and 2 elites.
 
-   - [wave type] waves consist of only the selected mob type (**common, elite, or boss**)
+   - [wave type] waves consist of **only** the selected mob type (**common, elite, or boss**)
 
- `/mw create [# of waves] [# monsters per wave] [level of monsters] [wave type] [OPTIONAL: wave time in seconds]`
+ `/mw create w[waves] x[mobs per wave] lv[level]`
 
-   - Create a custom set of waves, each wave will start automatically when the previous one ends.
-   
-   - If you want a custom time but not a custom wave type, put `none` for wave type and then add your time.
+    - Create a custom set of waves, each wave will start automatically when the previous one ends.
+
+   - Additional optional settings: t[type] s[wave time in seconds] hp[hp] atk[atk] def[def]
+
+   Types for custom waves are 1 (commmon mobs), 2 (elite mobs), and 3 (boss mobs). 
+
+   **For example: `/mw create w5 x3 lv50 t2` will create 5 waves of 3 mobs each, at level 50, all elite mobs**
 
 `/mw skip`
 - Skips the current wave

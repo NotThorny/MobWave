@@ -5,28 +5,33 @@ import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
 import emu.grasscutter.command.CommandHandler;
 import emu.grasscutter.command.Command;
 
-import emu.grasscutter.game.dungeons.challenge.trigger.KillMonsterTrigger;
-import emu.grasscutter.game.dungeons.challenge.trigger.ChallengeTrigger;
-import emu.grasscutter.game.dungeons.challenge.trigger.InTimeTrigger;
+import emu.grasscutter.game.dungeons.challenge.trigger.*;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
+import static emu.grasscutter.command.CommandHelpers.*;
 import emu.grasscutter.game.entity.EntityMonster;
 import emu.grasscutter.game.player.Player;
+import emu.grasscutter.game.props.FightProperty;
 import emu.grasscutter.game.world.Scene;
 
-import emu.grasscutter.data.excels.MonsterData;
-import emu.grasscutter.data.GameData;
 import thorny.grasscutters.MobWave.sufferHandler;
+import emu.grasscutter.data.excels.MonsterData;
 import emu.grasscutter.scripts.data.SceneGroup;
+import emu.grasscutter.data.GameData;
 import emu.grasscutter.utils.Position;
 import emu.grasscutter.Grasscutter;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import com.google.gson.Gson;
+import java.util.function.BiConsumer;
+import java.util.regex.Pattern;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.Gson;
+
+import lombok.Setter;
 
 import java.util.*;
 import java.io.*;
@@ -35,6 +40,11 @@ import java.io.*;
 @Command(label = "mobwave", aliases = "mw", usage = "start/stop \n /mw create [# waves] [# mobs per wave] [level] [wave time in sec]"
         + "\n Wave time is optional and will default to 300 seconds if not specified")
 public class MobWaveCommand implements CommandHandler {
+    // Patterns
+    public static final Pattern wavesRegex = Pattern.compile("w(\\d+)");
+    public static final Pattern timeRegex = Pattern.compile("s(\\d+)");
+    public static final Pattern typeRegex = Pattern.compile("t(\\d+)");
+
     public static WorldChallenge mobWaveChallenge;
 
     // Challenge triggers
@@ -42,16 +52,17 @@ public class MobWaveCommand implements CommandHandler {
     InTimeTrigger timeMob = new InTimeTrigger();
 
     // Lists
+    List<EntityMonster> monsters = new ArrayList<EntityMonster>(); // Mob entities
+    ArrayList<ChallengeTrigger> cTrigger = new ArrayList<>(); // Challenge triggers
+    List<EntityMonster> activeMonsters = new ArrayList<>(); // Current mobs
+    SpawnParameters param = new SpawnParameters(); // Custom parameters
+    static JsonArray commonMob = new JsonArray(); // Common mobs
+    static JsonArray eliteMob = new JsonArray(); // Elite mobs
+    static JsonArray bossMob = new JsonArray(); // Boss mobs
+    public SceneGroup mobSG = new SceneGroup(); // Mobs scenegroup
     static JsonObject jsonMobs = null; // Mob object from file
     static JsonArray arrMobs = null; // Array of mobs from file
-    static JsonArray commonMob = new JsonArray();
-    static JsonArray eliteMob = new JsonArray();
-    static JsonArray bossMob = new JsonArray();
-    List<EntityMonster> monsters = new ArrayList<EntityMonster>();
-    ArrayList<ChallengeTrigger> cTrigger = new ArrayList<>();
-    List<EntityMonster> activeMonsters = new ArrayList<>();
-    public SceneGroup mobSG = new SceneGroup();
-
+   
     // Defaults
     String userWaveReq = "none"; // Custom wave type set by user
     String waveType = "common"; // Type of wave being spawned
@@ -59,6 +70,20 @@ public class MobWaveCommand implements CommandHandler {
     int generatedCount = 0; // Spawned mob counter
     int alive = 0; // Number of mobs alive
     int n = 0; // Wave counter
+    
+
+    // Taken from SpawnCommand.java with edits made to match 'create'
+    private static final Map<Pattern, BiConsumer<SpawnParameters, Integer>> intCommandHandlers = Map.ofEntries(
+        Map.entry(lvlRegex, SpawnParameters::setLvl),
+        Map.entry(amountRegex, SpawnParameters::setAmount),
+        Map.entry(wavesRegex, SpawnParameters::setWaves),
+        Map.entry(timeRegex, SpawnParameters::setTime),
+        Map.entry(typeRegex, SpawnParameters::setType),
+        Map.entry(maxHPRegex, SpawnParameters::setMaxHP),
+        Map.entry(hpRegex, SpawnParameters::setHp),
+        Map.entry(defRegex, SpawnParameters::setDef),
+        Map.entry(atkRegex, SpawnParameters::setAtk)
+    );
 
     // Read file to memory
     public static void readFile() throws FileNotFoundException, IOException {
@@ -67,6 +92,7 @@ public class MobWaveCommand implements CommandHandler {
             arrMobs = new Gson().fromJson(reader, JsonArray.class);
             reader.close();
 
+            // Add mobs to respective groups
             for(JsonElement curMob : arrMobs){
                 String type = curMob.getAsJsonObject().get("Type").getAsString();
                 switch (type) {
@@ -94,6 +120,7 @@ public class MobWaveCommand implements CommandHandler {
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
         // Wave and mob default settings
+        param = new SpawnParameters();
         int nuMobs = 5;     // Number of mobs spawned per wave
         int lvMobs = 90;    // Level of monsters spawned
         int nuWaves = 999;  // Number of waves
@@ -144,10 +171,29 @@ public class MobWaveCommand implements CommandHandler {
 
         // Custom wave
         else if (args.get(0).equals("create")) {
+            // Get user params
+            parseIntParameters(args, param, intCommandHandlers);
+
             // Set wave settings
-            int cWaves = Integer.parseInt(args.get(1));
-            int cMobs = Integer.parseInt(args.get(2));
-            int cLevel = Integer.parseInt(args.get(3));
+            int cWaves = param.waves;
+            int cMobs = param.amount;
+            int cLevel = param.lvl;
+            time = param.time;
+
+            switch (param.type) {
+                case 1:
+                    userWaveReq = "common";
+                    break;
+                case 2:
+                    userWaveReq = "elite";
+                    break;
+                case 3:
+                    userWaveReq = "boss";
+                    break;
+                default:
+                    userWaveReq = "none";
+                    break;
+            }
 
             // Make sure valid arguments
             if (cWaves < 1) {
@@ -167,30 +213,6 @@ public class MobWaveCommand implements CommandHandler {
             int step = 0;
 
             isWaves = true;
-
-            // Determine if wave type was set by user
-            if (args.size() > 4) {
-                if (args.get(4) != null) {
-                    try {
-                        // Set wave type to match user input
-                        userWaveReq = args.get(4);
-                    } catch (Exception e) {
-                        this.sendUsageMessage(targetPlayer);
-                    }
-                } // if args
-            } // if size
-
-            // Determine if time was set by user
-            if (args.size() > 5) {
-                if (args.get(5) != null) {
-                    try {
-                        // Set time to match user input
-                        time = Integer.valueOf(args.get(4));
-                    } catch (NumberFormatException exception) {
-                        this.sendUsageMessage(targetPlayer);
-                    }
-                } // if args
-            } // if size
 
             // Set and start challenge
             List<Integer> paramList = List.of(cMobs, time);
@@ -393,10 +415,11 @@ public class MobWaveCommand implements CommandHandler {
 
         // Repeat once per second
         executor.scheduleAtFixedRate(() -> {
+            // Get current location
             Scene scene = targetPlayer.getScene();
             Position pos = targetPlayer.getPosition();
-            newMonsters.clear();
-            exceedTime(targetPlayer);
+            newMonsters.clear(); // Clean list
+            exceedTime(targetPlayer); // Check for time
 
             // When timer runs out
             if (exceedTime(targetPlayer)) {
@@ -420,6 +443,7 @@ public class MobWaveCommand implements CommandHandler {
                     for (int i = 0; i < goal; i++) {
                         MonsterData monsterData = setMonsterData(i);
                         EntityMonster entity = new EntityMonster(scene, monsterData, pos.nearby2d(4f), mLevel);
+                        applyCommonParameters(entity, param);
                         scene.addEntity(entity);
                         newMonsters.add(entity);
                         generatedCount++;
@@ -430,11 +454,12 @@ public class MobWaveCommand implements CommandHandler {
                     // Alert if next wave is boss wave
                     if((n+1)%5==0){
                         CommandHandler.sendMessage(targetPlayer, "Boss incoming next wave!");
-                    }
+                    } // if
 
+                    // Stop waves if only one exists
                     if (nuWaves == 1) {
                         isWaves = false;
-                    }
+                    } // if
 
                 } // if
                 newMonsters.clear();
@@ -475,4 +500,35 @@ public class MobWaveCommand implements CommandHandler {
             return false;
         } // else
     } // exceedTime
+
+    // Taken from SpawnCommand.java
+    private static class SpawnParameters {
+        @Setter public int lvl = 1;
+        @Setter public int time = 300;
+        @Setter public int waves = 1;
+        @Setter public int amount = 1;
+        @Setter public int hp = -1;
+        @Setter public int maxHP = -1;
+        @Setter public int atk = -1;
+        @Setter public int def = -1;
+        @Setter public int type = -1;
+    }
+    // Taken from SpawnCommand.java
+    private void applyCommonParameters(EntityMonster entity, SpawnParameters param) {
+        if (param.maxHP != -1) {
+            entity.setFightProperty(FightProperty.FIGHT_PROP_MAX_HP, param.maxHP);
+            entity.setFightProperty(FightProperty.FIGHT_PROP_BASE_HP, param.maxHP);
+        }
+        if (param.hp != -1) {
+            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_HP, param.hp == 0 ? Float.MAX_VALUE : param.hp);
+        }
+        if (param.atk != -1) {
+            entity.setFightProperty(FightProperty.FIGHT_PROP_ATTACK, param.atk);
+            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_ATTACK, param.atk);
+        }
+        if (param.def != -1) {
+            entity.setFightProperty(FightProperty.FIGHT_PROP_DEFENSE, param.def);
+            entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_DEFENSE, param.def);
+        }
+    }
 } // MobWaveCommand
