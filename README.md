@@ -17,18 +17,18 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 ## Usage
 
- `/mw start` OR `/mw start [wave type]`
+ `/mw start` OR `/mw start [common|elite|boss]`
 
    - Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
-   - First wave is 4 common and 1 elite mob, every 5th wave is a boss wave of 1 boss, 2 elites, and 2 commons, and every other wave is 3 common and 2 elites.
-
-   - [wave type] waves consist of **only** the selected mob type (**common, elite, or boss**)
-
+   - Adding wave type will consist of **only** the selected mob type!
+   - Every 5th wave is a boss wave.
+   
  `/mw create w[waves] x[mobs per wave] lv[level]`
 
-    - Create a custom set of waves, each wave will start automatically when the previous one ends.
+   - Create a custom set of waves, each wave will start automatically when the previous one ends.
 
    - Additional optional settings: t[type] s[wave time in seconds] hp[hp] atk[atk] def[def]
+   - **Order does not matter, so feel free to use as many or as few of the modifiers you want and in any order**
 
    Types for custom waves are 1 (commmon mobs), 2 (elite mobs), and 3 (boss mobs). 
 
@@ -49,10 +49,6 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 This uses the Grasscutters plugin template for 1.3.2.
 
-### Planned
-
-Soon will change `create` to follow the spawn command usage of using modifiers (x, lv) so that the command won't require strict user input order
-
 ### Issues
 
 #### Any suggestions or issues are welcomed in [issues](https://github.com/NotThorny/MobWave/issues)
@@ -62,5 +58,3 @@ Soon will change `create` to follow the spawn command usage of using modifiers (
 -Timer works but visual on-screen timer does not update.
 
 -No graphic on success/fail.
-
--Additional spawn modifiers added in 1.3.1 'extended spawn command' update are not applicable.
