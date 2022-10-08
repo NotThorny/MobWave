@@ -307,7 +307,7 @@ public class MobWaveCommand implements CommandHandler {
             waveType = userWaveReq;
         }
 
-        // Get mob from type
+        // Get mob from type and of required chance
         switch (waveType) {
             case "common":
                 randomMob = commonMob.get(pRandom.nextInt(commonMob.size())).getAsJsonObject();
@@ -401,11 +401,8 @@ public class MobWaveCommand implements CommandHandler {
             // When timer runs out
             if (exceedTime(targetPlayer)) {
                 CommandHandler.sendMessage(targetPlayer, "Ran out of time!");
-                executor.shutdown();
-                removeAliveMobs();
                 mobWaveChallenge.fail();
-                isWaves = false;
-                resetWaves();
+                endChallenge(executor);
                 return;
             } // if
 
@@ -414,10 +411,7 @@ public class MobWaveCommand implements CommandHandler {
                 // Check if waves are completed and shutdown if so
                 if (!isWaves || !checkWave(nuWaves)) {
                     CommandHandler.sendMessage(targetPlayer, "Challenge finished!");
-                    executor.shutdown();
-                    activeMonsters.clear();
-                    isWaves = false;
-                    resetWaves();
+                    endChallenge(executor);
                     return;
                 } // if
 
@@ -433,6 +427,7 @@ public class MobWaveCommand implements CommandHandler {
                     setMonsters(newMonsters);
                     incrementWaves();
 
+                    // Alert if next wave is boss wave
                     if((n+1)%5==0){
                         CommandHandler.sendMessage(targetPlayer, "Boss incoming next wave!");
                     }
@@ -444,7 +439,7 @@ public class MobWaveCommand implements CommandHandler {
                 } // if
                 newMonsters.clear();
 
-                // Check if there are waves remaining and spawn if last wave finished
+                // Start next wave is previous finished and waves remain
                 if (nuWaves > 1) {
                     if (mobWaveChallenge.isSuccess()) {
                         generatedCount = 0;
@@ -460,6 +455,14 @@ public class MobWaveCommand implements CommandHandler {
             } // if getAliveMonstersCount
         }, 0, 1, TimeUnit.SECONDS); // executor
     } // spawnMobEntity
+
+    // End challenge and clean up
+    private void endChallenge(ScheduledExecutorService executor) {
+        executor.shutdown();
+        removeAliveMobs();
+        isWaves = false;
+        resetWaves();
+    }
 
     // Check if wave has exceeded time limit
     private boolean exceedTime(Player targetPlayer) {
