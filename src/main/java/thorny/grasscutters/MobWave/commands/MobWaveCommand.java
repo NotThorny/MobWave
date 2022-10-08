@@ -37,8 +37,9 @@ import java.util.*;
 import java.io.*;
 
 // Command usage
-@Command(label = "mobwave", aliases = "mw", usage = "start/stop \n /mw create [# waves] [# mobs per wave] [level] [wave time in sec]"
-        + "\n Wave time is optional and will default to 300 seconds if not specified")
+@Command(label = "mobwave", aliases = "mw", usage = "start/stop \n /mw create w[# waves] x[# mobs per wave] lv[level] s[wave time in sec] t[type of mobs]"
+        + "\n Types: 1 (common), 2 (elite), 3 (boss). Timer will default to 300 seconds"
+        + "\n Start can specify type of mobs to spawn (only that type will spawn): start common|elite|boss")
 public class MobWaveCommand implements CommandHandler {
     // Patterns
     public static final Pattern wavesRegex = Pattern.compile("w(\\d+)");
