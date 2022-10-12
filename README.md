@@ -17,11 +17,12 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 
 ## Usage
 
- `/mw start` OR `/mw start [common|elite|boss]`
+ `/mw start`
 
    - Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
    - Adding wave type will consist of **only** the selected mob type!
    - Every 5th wave is a boss wave.
+     -  /mw start [common|elite|boss] will start waves of **only the selected mob type**
    
  `/mw create w[waves] x[mobs per wave] lv[level]`
 
