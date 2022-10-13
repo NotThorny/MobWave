@@ -1,7 +1,8 @@
 # MobWave Basics
 
 This is a simple plugin to easily generate "waves" of random enemies to fight.
-This pulls from a *nearly* complete list of monsters. Too many bosses were spawning so I removed a bunch.
+This pulls from a *nearly* complete list of monsters. 
+All previously removed bosses were re-added with the implementation of boss waves.
 
 There will probably be issues if you don't use the commands as intended so follow the usage.
 
@@ -18,11 +19,11 @@ Place MobWave.jar into your `\grasscutter\plugins` folder and restart the server
 ## Usage
 
  `/mw start`
-
+  
    - Start unlimited waves of 5 monsters at level 90 with 5 minutes per wave.
    - Adding wave type will consist of **only** the selected mob type!
    - Every 5th wave is a boss wave.
-     -  /mw start [common|elite|boss] will start waves of **only the selected mob type**
+   - `/mw start [common|elite|boss]` will start waves of **only the selected mob type**
    
  `/mw create w[waves] x[mobs per wave] lv[level]`
 
