@@ -132,6 +132,12 @@
     "Chance": "75"
   },
   {
+    "id": "20040701",
+    "Name": "Dendro Hypostasis",
+    "Type": "boss",
+    "Chance": "75"
+  },
+  {
     "id": "20050102",
     "Name": "Oceanid",
     "Type": "boss",
