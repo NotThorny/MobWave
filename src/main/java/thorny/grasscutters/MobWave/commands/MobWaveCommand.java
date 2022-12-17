@@ -87,7 +87,7 @@ public class MobWaveCommand implements CommandHandler {
     );
 
     // Read file to memory
-    public static void readFile() throws FileNotFoundException, IOException {
+    public static void readFile() {
 
         try (Reader reader = new InputStreamReader(MobWaveCommand.class.getResourceAsStream("/monsters.json"))) {
             arrMobs = new Gson().fromJson(reader, JsonArray.class);
@@ -97,24 +97,20 @@ public class MobWaveCommand implements CommandHandler {
             for(JsonElement curMob : arrMobs){
                 String type = curMob.getAsJsonObject().get("Type").getAsString();
                 switch (type) {
-                    case "common":
-                        commonMob.add(curMob);
-                        break;
-                    case "elite":
-                        eliteMob.add(curMob);
-                        break;
-                    case "boss":
-                        bossMob.add(curMob);
-                        break;
-                    default:
-                        // Invalid mob types are ignored
-                        break;
+                    case "common" -> commonMob.add(curMob);
+                    case "elite" -> eliteMob.add(curMob);
+                    case "boss" -> bossMob.add(curMob);
+                    default -> {} // Invalid mob types are ignored
                 }
             }
         } // try
 
-        catch (IOException e) {
-            Grasscutter.getLogger().info("Failed to load file.", e);
+        catch (Exception e) {
+            Grasscutter.getLogger().error("Failed to load file monsters.json, using minimal fallback.", e);
+            // Use single fallback mob for each type to prevent total failure
+            commonMob.add(21010101);
+            eliteMob.add(21010301);
+            bossMob.add(26020101);
         } // catch
     }// readFile
 
@@ -182,18 +178,10 @@ public class MobWaveCommand implements CommandHandler {
             time = param.time;
 
             switch (param.type) {
-                case 1:
-                    userWaveReq = "common";
-                    break;
-                case 2:
-                    userWaveReq = "elite";
-                    break;
-                case 3:
-                    userWaveReq = "boss";
-                    break;
-                default:
-                    userWaveReq = "none";
-                    break;
+                case 1 -> userWaveReq = "common";
+                case 2 -> userWaveReq = "elite";
+                case 3 -> userWaveReq = "boss";
+                default -> userWaveReq = "none";
             }
 
             // Make sure valid arguments
@@ -291,36 +279,22 @@ public class MobWaveCommand implements CommandHandler {
         }
 
         // Boss wave
-        if (n > 0 && (n+1) % 5 == 0) {
+        if (n > 0 && (n + 1) % 5 == 0) {
             switch (imn) {
-                case 4:
-                    waveType = "elite";
-                    break;
-                case 3:
-                    waveType = "elite";
-                    break;
-                case 0:
-                    waveType = "boss";
-                    break;
-                default:
-                    waveType = "common";
+                case 4 -> waveType = "elite";
+                case 3 -> waveType = "elite";
+                case 0 -> waveType = "boss";
+                default -> waveType = "common";
             } // switch
         } // if
-        
+
         // Normal wave
         else {
             switch (imn) {
-                case 4:
-                    waveType = "elite";
-                    break;
-                case 3:
-                    waveType = "elite";
-                    break;
-                case 0:
-                    waveType = "common";
-                    break;
-                default:
-                    waveType = "common";
+                case 4 -> waveType = "elite";
+                case 3 -> waveType = "elite";
+                case 0 -> waveType = "common";
+                default -> waveType = "common";
             } // switch
         } // else
 
