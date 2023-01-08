@@ -4,7 +4,6 @@ import emu.grasscutter.plugin.Plugin;
 import emu.grasscutter.server.event.EventHandler;
 import emu.grasscutter.server.event.HandlerPriority;
 import emu.grasscutter.server.event.entity.EntityDeathEvent;
-import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 public final class MobWave extends Plugin {
     private static MobWave instance;
@@ -29,9 +28,6 @@ public final class MobWave extends Plugin {
 
         // Log a plugin status message.
         this.getLogger().info("The MobWave plugin has been enabled.");
-
-        // Read file to memory
-        MobWaveCommand.readFile();
     }
 
     @Override public void onDisable() {
