@@ -120,11 +120,14 @@ public class MobWaveCommand implements CommandHandler {
         // Custom wave
         else if (args.get(0).equals("create")) {
 
-            if(mobWaveChallenge.inProgress()){
+            try{
+                if(mobWaveChallenge.inProgress()){
                 CommandHandler.sendMessage(targetPlayer, 
                     "Another challenge is currently in progress, please wait for the other challenge to finish!");
                 return;
-            }
+                }
+            }catch(Exception e){}
+            
             // Get user params
             parseIntParameters(args, param, intCommandHandlers);
 
@@ -172,11 +175,13 @@ public class MobWaveCommand implements CommandHandler {
         // Challenge using wave defaults
         else if (args.get(0).equals("start")) {
 
-            if(mobWaveChallenge.inProgress()){
+            try{
+                if(mobWaveChallenge.inProgress()){
                 CommandHandler.sendMessage(targetPlayer, 
                     "Another challenge is currently in progress, please wait for the other challenge to finish!");
                 return;
-            }
+                }
+            }catch(Exception e){}
 
             // Determine if wave type is set
             if (args.size() > 1) {
