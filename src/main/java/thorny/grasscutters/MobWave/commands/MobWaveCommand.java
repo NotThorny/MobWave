@@ -106,7 +106,7 @@ public class MobWaveCommand implements CommandHandler {
         } // try
 
         catch (Exception e) {
-            Grasscutter.getLogger().error("Failed to load file monsters.json, using minimal fallback.", e);
+            Grasscutter.getLogger().error("[MobWave] Failed to load file monsters.json, using minimal fallback.", e);
             // Use single fallback mob for each type to prevent total failure
             commonMob.add(21010101);
             eliteMob.add(21010301);
@@ -116,6 +116,7 @@ public class MobWaveCommand implements CommandHandler {
 
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
+        int uid = targetPlayer.getUid();
         // Wave and mob default settings
         param = new SpawnParameters();
         int nuMobs = 5;     // Number of mobs spawned per wave
@@ -157,6 +158,8 @@ public class MobWaveCommand implements CommandHandler {
                     return;
                 } // if
             } catch (Exception e) {
+                // Attempt to stop waves anyways
+                isWaves = false;
             } // catch
             if (isWaves) {
                 isWaves = false;
@@ -208,7 +211,7 @@ public class MobWaveCommand implements CommandHandler {
             mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, cMobs,
                     cTrigger);
             mobWaveChallenge.start();
-            spawnMobEntity(sender, targetPlayer, args, cMobs, cWaves, arrMobs, cLevel, step, paramList, time, waveType);
+            spawnMobEntity(uid, targetPlayer, args, cMobs, cWaves, arrMobs, cLevel, step, paramList, time, waveType);
 
         } // create
 
@@ -232,7 +235,7 @@ public class MobWaveCommand implements CommandHandler {
             mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time, nuMobs,
                     cTrigger);
             mobWaveChallenge.start();
-            spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, arrMobs, lvMobs, step, paramList, time, waveType);
+            spawnMobEntity(uid, targetPlayer, args, nuMobs, nuWaves, arrMobs, lvMobs, step, paramList, time, waveType);
         } // start
 
         else {
@@ -379,7 +382,7 @@ public class MobWaveCommand implements CommandHandler {
     } // getMobSceneGroup
 
     // Spawn the monsters
-    public void spawnMobEntity(Player sender, Player targetPlayer, List<String> args, int nuMobs, int nuWaves,
+    public void spawnMobEntity(int uid, Player targetPlayer, List<String> args, int nuMobs, int nuWaves,
             JsonArray arrMobs, int mLevel, int step, List<Integer> paramList, int time, String waveType) {
         // Defaults
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -395,6 +398,12 @@ public class MobWaveCommand implements CommandHandler {
             Position pos = targetPlayer.getPosition();
             newMonsters.clear(); // Clean list
             exceedTime(targetPlayer); // Check for time
+
+            if(!(targetPlayer.getServer().getPlayerByUid(uid, true).isOnline())){
+                Grasscutter.getLogger().info("[MobWave] Player logged out so challenge ended.");
+                mobWaveChallenge.fail();
+                endChallenge(executor);
+            }
 
             // When timer runs out
             if (exceedTime(targetPlayer)) {
@@ -448,7 +457,7 @@ public class MobWaveCommand implements CommandHandler {
                         mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), mobSG, 180, 180, paramList, time,
                                 nuMobs, cTrigger);
                         mobWaveChallenge.start();
-                        spawnMobEntity(sender, targetPlayer, args, nuMobs, nuWaves, arrMobs, mLevel, step, paramList,
+                        spawnMobEntity(uid, targetPlayer, args, nuMobs, nuWaves, arrMobs, mLevel, step, paramList,
                                 time, waveType);
                     } // if
                 } // if nuWaves
