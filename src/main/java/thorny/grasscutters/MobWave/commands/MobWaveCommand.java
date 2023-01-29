@@ -131,11 +131,6 @@ public class MobWaveCommand implements CommandHandler {
             } // sender exists
         } // no args
 
-        else if (args.size() > 5) {
-            CommandHandler.sendMessage(targetPlayer, "Too many arguments!");
-            this.sendUsageMessage(targetPlayer);
-        } // exceed size
-
         else if (args.get(0).equals("suffer")) {
             sufferHandler sufferNow = new sufferHandler();
             sufferNow.sufferExecutor(targetPlayer, targetPlayer, args);
