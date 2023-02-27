@@ -30,6 +30,7 @@ public class MobWaveCommand implements CommandHandler {
     public static final Pattern wavesRegex = Pattern.compile("w(\\d+)");
     public static final Pattern timeRegex = Pattern.compile("s(\\d+)");
     public static final Pattern typeRegex = Pattern.compile("t(\\d+)");
+    public static final Pattern timesHPRegex = Pattern.compile("hx(\\d+)");
 
     public static WorldChallenge mobWaveChallenge;
 
@@ -58,6 +59,7 @@ public class MobWaveCommand implements CommandHandler {
         Map.entry(typeRegex, SpawnParameters::setType),
         Map.entry(maxHPRegex, SpawnParameters::setMaxHP),
         Map.entry(hpRegex, SpawnParameters::setHp),
+        Map.entry(timesHPRegex, SpawnParameters::setTiHP), // Times hp
         Map.entry(defRegex, SpawnParameters::setDef),
         Map.entry(atkRegex, SpawnParameters::setAtk)
     );
@@ -78,11 +80,6 @@ public class MobWaveCommand implements CommandHandler {
                 this.sendUsageMessage(targetPlayer);
             } // sender exists
         } // no args
-
-        else if (args.size() > 5) {
-            CommandHandler.sendMessage(targetPlayer, "Too many arguments!");
-            this.sendUsageMessage(targetPlayer);
-        } // exceed size
 
         else if (args.get(0).equals("suffer")) {
             sufferHandler sufferNow = new sufferHandler();
@@ -228,6 +225,7 @@ public class MobWaveCommand implements CommandHandler {
         @Setter public int amount = 1;
         @Setter public int hp = -1;
         @Setter public int maxHP = -1;
+        @Setter public int tiHP = -1;
         @Setter public int atk = -1;
         @Setter public int def = -1;
         @Setter public int type = -1;
@@ -248,6 +246,12 @@ public class MobWaveCommand implements CommandHandler {
         if (param.def != -1) {
             entity.setFightProperty(FightProperty.FIGHT_PROP_DEFENSE, param.def);
             entity.setFightProperty(FightProperty.FIGHT_PROP_CUR_DEFENSE, param.def);
+        }
+        if (param.tiHP != -1) {
+            // Increase hp by provided multiplier
+            entity.setFightProperty(
+                FightProperty.FIGHT_PROP_CUR_HP, param.hp == 0 ? Float.MAX_VALUE :
+                (entity.getFightProperty(FightProperty.FIGHT_PROP_CUR_HP) * param.hp));
         }
     }
 } // MobWaveCommand
