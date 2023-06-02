@@ -3,6 +3,7 @@
   "description": "Spawn a bunch of random mobs to die instantly",
   "version": "1.2.2-dev",
   "authors": [ "NotThorny", "snoobi-seggs" ],
+  "api": 2,
   
   "mainClass": "thorny.grasscutters.MobWave.MobWave",
   

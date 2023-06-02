@@ -10,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.command.CommandHandler;
 import emu.grasscutter.data.GameData;
-import emu.grasscutter.data.excels.MonsterData;
+import emu.grasscutter.data.excels.monster.MonsterData;
 import emu.grasscutter.game.dungeons.challenge.WorldChallenge;
 import emu.grasscutter.game.entity.EntityMonster;
 import emu.grasscutter.game.entity.GameEntity;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.net.proto.VisionTypeOuterClass.VisionType;
-import emu.grasscutter.utils.Position;
+import emu.grasscutter.game.world.Position;
 import thorny.grasscutters.MobWave.commands.MobWaveCommand;
 
 public class MobSpawner {

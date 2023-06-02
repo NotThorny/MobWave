@@ -4,7 +4,7 @@ import emu.grasscutter.command.CommandHandler;
 import emu.grasscutter.command.commands.SpawnCommand;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.Grasscutter;
-import emu.grasscutter.utils.Position;
+import emu.grasscutter.game.world.Position;
 import emu.grasscutter.server.packet.send.PacketSceneEntityAppearNotify;
 
 import java.util.List;

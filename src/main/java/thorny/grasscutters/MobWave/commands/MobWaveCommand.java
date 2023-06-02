@@ -35,7 +35,7 @@ public class MobWaveCommand implements CommandHandler {
     public static WorldChallenge mobWaveChallenge;
 
     // Challenge triggers
-    KillMonsterTrigger killMob = new KillMonsterTrigger();
+    KillMonsterTrigger killMob = new KillMonsterTrigger(0);
     InTimeTrigger timeMob = new InTimeTrigger();
 
     // Lists
