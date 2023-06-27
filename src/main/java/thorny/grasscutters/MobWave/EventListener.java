@@ -24,7 +24,7 @@ public final class EventListener {
                 //MobWaveCommand mwc = new MobWaveCommand();
                 GameEntity monster = event.getEntity();
                 var entType = event.getEntity().getEntityType();
-                if (EntityType.Monster.getValue() == entType){
+                if (EntityType.Monster.getValue() == entType.getValue()){
                     MobWaveCommand.mobWaveChallenge.onMonsterDeath((EntityMonster) monster);
                 }
             } catch (Exception e) {
