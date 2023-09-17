@@ -130,6 +130,7 @@ public class MobSpawner {
             // Get current location
             Scene scene = targetPlayer.getScene();
             Position pos = targetPlayer.getPosition();
+            Position rot = targetPlayer.getRotation();
             newMonsters.clear(); // Clean list
             exceedTime(targetPlayer); // Check for time
     
@@ -161,7 +162,7 @@ public class MobSpawner {
                 if (MobSpawner.generatedCount < goal && MobWaveCommand.isWaves) {
                     for (int i = 0; i < goal; i++) {
                         MonsterData monsterData = setMonsterData(i);
-                        EntityMonster entity = new EntityMonster(scene, monsterData, pos.nearby2d(4f), mLevel);
+                        EntityMonster entity = new EntityMonster(scene, monsterData, pos.nearby2d(4f), rot, mLevel);
                         MobWaveCommand.applyCommonParameters(entity, MobWaveCommand.param);
                         scene.addEntity(entity);
                         newMonsters.add(entity);
