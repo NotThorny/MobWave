@@ -25,7 +25,7 @@ public class MobSpawner {
     public static List<Integer> commonMob = monsterLists.getCommonMobs(); // Common mobs
     public static List<Integer> eliteMob = monsterLists.getEliteMobs(); // Elite mobs
     public static List<Integer> bossMob = monsterLists.getBossMobs(); // Boss mobs
-    
+
     public static int generatedCount = 0; // Spawned mob counter
     static int alive = 0; // Number of mobs alive
     public static int n = 0; // Wave counter
@@ -52,12 +52,12 @@ public class MobSpawner {
     public static MonsterData setMonsterData(int imn) {
         Random pRandom = new Random();
         int randomMob;
-    
+
         // Sanity check
         if (MobWaveCommand.waveType.equals(null)) {
             MobWaveCommand.waveType = "common";
         } // if
-    
+
         // Scale elite spawns
         if (imn > 0 && imn % 4 == 0) {
             imn = 4;
@@ -65,7 +65,7 @@ public class MobSpawner {
         if (imn > 0 && imn % 3 == 0) {
             imn = 3;
         }
-    
+
         // Boss wave
         if (MobSpawner.n > 0 && (MobSpawner.n + 1) % 5 == 0) {
             switch (imn) {
@@ -75,7 +75,7 @@ public class MobSpawner {
                 default -> MobWaveCommand.waveType = "common";
             } // switch
         } // if
-    
+
         // Normal wave
         else {
             switch (imn) {
@@ -85,22 +85,22 @@ public class MobSpawner {
                 default -> MobWaveCommand.waveType = "common";
             } // switch
         } // else
-    
+
         // Custom user wave type
-        if(!MobWaveCommand.userWaveReq.equals("none")){
+        if (!MobWaveCommand.userWaveReq.equals("none")) {
             Grasscutter.getLogger().info("Set custom wave: " + MobWaveCommand.userWaveReq);
             MobWaveCommand.waveType = MobWaveCommand.userWaveReq;
         }
-    
+
         // Get random mob from type
         switch (MobWaveCommand.waveType) {
-            case "common" ->  randomMob = commonMob.get(pRandom.nextInt(commonMob.size()));
+            case "common" -> randomMob = commonMob.get(pRandom.nextInt(commonMob.size()));
             case "elite" -> randomMob = eliteMob.get(pRandom.nextInt(eliteMob.size()));
             case "boss" -> randomMob = bossMob.get(pRandom.nextInt(bossMob.size()));
             // Use common mob when no match
             default -> randomMob = commonMob.get(pRandom.nextInt(commonMob.size()));
         } // switch
-    
+
         // Set mob
         MonsterData monsterData = GameData.getMonsterDataMap().get(randomMob);
         return monsterData;
@@ -117,14 +117,14 @@ public class MobSpawner {
 
     // Spawn the monsters
     public static void spawnMobEntity(int uid, Player targetPlayer, List<String> args, int nuMobs, int nuWaves,
-        int mLevel, int step, List<Integer> paramList, int time, String waveType) {
+            int mLevel, int step, List<Integer> paramList, int time, String waveType) {
         // Defaults
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         List<EntityMonster> newMonsters = new ArrayList<>();
         MobSpawner.generatedCount = 0;
         int goal = nuMobs;
         MobWaveCommand.isWaves = true;
-    
+
         // Repeat once per second
         executor.scheduleAtFixedRate(() -> {
             // Get current location
@@ -132,23 +132,14 @@ public class MobSpawner {
             Position pos = targetPlayer.getPosition();
             Position rot = targetPlayer.getRotation();
             newMonsters.clear(); // Clean list
-            exceedTime(targetPlayer); // Check for time
-    
-            if(!(targetPlayer.getServer().getPlayerByUid(uid, true).isOnline())){
+
+            if (!(targetPlayer.getServer().getPlayerByUid(uid, true).isOnline())) {
                 Grasscutter.getLogger().info("[MobWave] Player logged out so challenge ended.");
                 MobWaveCommand.mobWaveChallenge.fail();
                 endChallenge(executor);
                 MobWaveCommand.playerExited = false;
             }
-    
-            // When timer runs out
-            if (exceedTime(targetPlayer)) {
-                CommandHandler.sendMessage(targetPlayer, "Ran out of time!");
-                MobWaveCommand.mobWaveChallenge.fail();
-                endChallenge(executor);
-                return;
-            } // if
-    
+
             // Check to spawn
             if (MobSpawner.getAliveMonstersCount() <= 0) {
                 // Check if waves are completed and shutdown if so
@@ -157,7 +148,7 @@ public class MobSpawner {
                     endChallenge(executor);
                     return;
                 } // if
-    
+
                 // Spawns mobs if waves remain and challenge is active
                 if (MobSpawner.generatedCount < goal && MobWaveCommand.isWaves) {
                     for (int i = 0; i < goal; i++) {
@@ -170,28 +161,28 @@ public class MobSpawner {
                     } // for
                     setMonsters(newMonsters);
                     incrementWaves();
-    
+
                     // Alert if next wave is boss wave
-                    if((MobSpawner.n+1)%5==0){
+                    if ((MobSpawner.n + 1) % 5 == 0) {
                         CommandHandler.sendMessage(targetPlayer, "Boss incoming next wave!");
                     } // if
-    
+
                     // Stop waves if only one exists
                     if (nuWaves == 1) {
                         MobWaveCommand.isWaves = false;
                     } // if
-    
+
                 } // if
                 newMonsters.clear();
-    
+
                 // Start next wave is previous finished and waves remain
                 if (nuWaves > 1) {
                     if (MobWaveCommand.mobWaveChallenge.isSuccess()) {
                         MobSpawner.generatedCount = 0;
                         executor.shutdown();
                         MobWaveCommand.mobSG.setId(80085);
-                        MobWaveCommand.mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(), MobWaveCommand.mobSG, 180, 180, paramList, time,
-                                nuMobs, MobWaveCommand.cTrigger);
+                        MobWaveCommand.mobWaveChallenge = new WorldChallenge(targetPlayer.getScene(),
+                                MobWaveCommand.mobSG, 180, 180, paramList, time, nuMobs, MobWaveCommand.cTrigger);
                         MobWaveCommand.mobWaveChallenge.start();
                         spawnMobEntity(uid, targetPlayer, args, nuMobs, nuWaves, mLevel, step, paramList,
                                 time, waveType);
@@ -209,21 +200,10 @@ public class MobSpawner {
         resetWaves();
     }
 
-    // Check if wave has exceeded time limit
-    private static boolean exceedTime(Player targetPlayer) {
-        var current = System.currentTimeMillis();
-        // If time is exceeded
-        if (current - MobWaveCommand.mobWaveChallenge.getStartedAt() > MobWaveCommand.mobWaveChallenge
-                .getTimeLimit() * 1000L) {
-            return true;
-        } else {
-            return false;
-        } // else
-    } // exceedTime
-
     // Remove currently alive monsters
     public static void removeAliveMobs() {
-        MobWaveCommand.mobWaveChallenge.getScene().removeEntities(MobSpawner.activeMonsters, VisionType.VISION_TYPE_REMOVE);
+        MobWaveCommand.mobWaveChallenge.getScene().removeEntities(MobSpawner.activeMonsters,
+                VisionType.VISION_TYPE_REMOVE);
         MobSpawner.activeMonsters.clear();
     } // removeAliveMobs
 
@@ -239,5 +219,5 @@ public class MobSpawner {
             } // if
         } // for
         return count;
-    } // getAliveMonstersCount  
+    } // getAliveMonstersCount
 }
